@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>False</SignAssembly>
+	  <LangVersion>10</LangVersion>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Authors>Samy Sammour</Authors>
+	  <Copyright>Samy Sammour</Copyright>
+  </PropertyGroup>
+
+</Project>
