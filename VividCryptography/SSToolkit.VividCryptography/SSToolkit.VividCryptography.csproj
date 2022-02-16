@@ -7,7 +7,20 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <Authors>Samy Sammour</Authors>
 	  <Copyright>Samy Sammour</Copyright>
-	  <Description>VividCryptography</Description>
+	  <Description>VividCryptography for secure AES encryption and Rfc2898 hashing</Description>
+	  <PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/VividCryptography/SSToolkit.VividCryptography</PackageProjectUrl>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/VividCryptography/SSToolkit.VividCryptography</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>Hashing;Encryption;Decryption;Security</PackageTags>
+	  <PackageReleaseNotes>Publishing</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
