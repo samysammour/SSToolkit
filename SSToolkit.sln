@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.VividCryptography
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.VividCryptography.Tests", "VividCryptography\SSToolkit.VividCryptography.Tests\SSToolkit.VividCryptography.Tests.csproj", "{6D773583-FED3-4E17-882B-EF6A8D869C19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{BB94D5BC-6043-4A82-96D2-5817770857E1}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\NuGet Publishing.md = Docs\NuGet Publishing.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

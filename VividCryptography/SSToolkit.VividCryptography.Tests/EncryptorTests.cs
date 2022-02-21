@@ -14,9 +14,13 @@
             var result = crypto.Decrypt(cipherText);
             Assert.Equal(result, plainText);
 
-            var cipherText2 = crypto.Encrypt(plainText);
-            var result2 = crypto.Decrypt(cipherText2);
-            Assert.Equal(result2, plainText);
+            var repeatedcipherText = crypto.Encrypt(plainText);
+            var repeatedResult = crypto.Decrypt(repeatedcipherText);
+            Assert.Equal(repeatedResult, plainText);
+
+            string plainText2 = "424242424242424243";
+            var cipherText2 = crypto.Encrypt(plainText2);
+            Assert.NotEqual(cipherText2, cipherText);
         }
     }
 }

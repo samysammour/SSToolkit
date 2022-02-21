@@ -15,7 +15,7 @@
         /// <summary>
         /// Initial Encryptor
         /// </summary>
-        /// <param name="key">Encryption/Decryption key 64Byte</param>
+        /// <param name="key">Encryption/Decryption key (Suggested: 64 or 128 bytes)</param>
         public Encryptor(string key)
         {
             this.key = key;
@@ -24,11 +24,22 @@
         /// <summary>
         /// Encrypt
         /// </summary>
-        /// <param name="clearText">Origin text</param>
+        /// <param name="plainText">Plain text</param>
         /// <returns>Encrypted text</returns>
-        public string Encrypt(string clearText)
+        public string Encrypt(string plainText)
         {
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            if (plainText == null || plainText.Length <= 0)
+            {
+                throw new ArgumentNullException("Plain text is null or empty");
+            }
+
+            if (this.key == null || this.key.Length <= 0)
+            {
+                throw new ArgumentNullException("Key is null or empty");
+            }
+
+            byte[] clearBytes = Encoding.Unicode.GetBytes(plainText);
+            var cipherText = string.Empty;
             using (var encryptor = Aes.Create())
             {
                 byte[] iV = new byte[15];
@@ -44,23 +55,33 @@
                         cs.Write(clearBytes, 0, clearBytes.Length);
                     }
 
-                    clearText = Convert.ToBase64String(iV) + Convert.ToBase64String(ms.ToArray());
+                    cipherText = Convert.ToBase64String(iV) + Convert.ToBase64String(ms.ToArray());
                 }
             }
 
-            return clearText;
+            return cipherText;
         }
 
         /// <summary>
         /// Decrypt
         /// </summary>
         /// <param name="cipherText">Cipher text</param>
-        /// <returns>Origin text</returns>
+        /// <returns>Plain text</returns>
         public string Decrypt(string cipherText)
         {
+            if (cipherText == null || cipherText.Length <= 0)
+            {
+                throw new ArgumentNullException("Cipher text is null or empty");
+            }
+
+            if (this.key == null || this.key.Length <= 0)
+            {
+                throw new ArgumentNullException("Key is null or empty");
+            }
+
             byte[] iV = Convert.FromBase64String(cipherText.Substring(0, 20));
-            cipherText = cipherText.Substring(20).Replace(" ", "+");
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            byte[] cipherBytes = Convert.FromBase64String(cipherText.Substring(20).Replace(" ", "+"));
+            var plainText = string.Empty;
             using (var encryptor = Aes.Create())
             {
                 var pdb = new Rfc2898DeriveBytes(this.key, iV);
@@ -73,11 +94,11 @@
                         cs.Write(cipherBytes, 0, cipherBytes.Length);
                     }
 
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                    plainText = Encoding.Unicode.GetString(ms.ToArray());
                 }
             }
 
-            return cipherText;
+            return plainText;
         }
     }
 }

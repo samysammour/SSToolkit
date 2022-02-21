@@ -3,14 +3,17 @@ VividCryptography: Encrypt/Decrypt and Hash
 
 Encryptor
 ---
-- Use a 64Byte key to encrypt and decrypt using Aes algorithm and Rfc2898Derive to create random bytes.
+- Encrypt and decrypt plain text using Aes algorithm and Rfc2898Derive to create random bytes.
 
 
 ---
 Hashing
 ---
-- Create a hash using Pbkdf2 and iterate by default 10000 time adding a salt to the hash.
-- Hash a plaintext and compare it with old hash.
+- Compute a hash. (default: Sha256)
+- Salt (default: null) (Suggested: 128bytes) and interation (default: 1) (Suggested: 100000) can be added to hashing
+- Available algorithms (Md5, Sha1, Sha256, Sha384, Sha512)
+- Create random salt bytes (default size: 64) (Suggested: 128)
+- GetHashing string extension
 
 ---
 Usage:
@@ -26,21 +29,10 @@ var plainText = crypto.Decrypt(cipherText);
 
 Hashing
 ```csharp
-var hashing = new Hashing();
-string plainText = "Hello world!";
-var salt = hashing.GetSalt();
-var hash = hashing.GetCipherText(plainText, salt);
-```
-
-Hashing constructor parameters are:
-
-Parameter | Default value
-:---: | :---:
-hashSize  | 256
-saltSize  | 32
-iteration | 10000
-
-To compare hashing
-```csharp
-hashing.CompareHash(plainText, hash, salt)
+var salt = Hashing.GetSalt();
+var hash = Hashing.ComputeHash("Hello world!");
+var hashWithSalt = Hashing.ComputeHash("Hello world!", salt);
+var hashWithIteration = Hashing.ComputeHash("Hello world!", salt, 100000);
+var hashAlgorthirm = Hashing.ComputeHash("Hello world!", salt, 100000);
+var hash = Hashing.ComputeHash("Hello world!", salt, 100000, HashType.Sha512);
 ```

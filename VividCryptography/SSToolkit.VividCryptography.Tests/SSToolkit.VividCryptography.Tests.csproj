@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\VividCryptography\SSToolkit.VividCryptography.csproj" />
     <ProjectReference Include="..\SSToolkit.VividCryptography\SSToolkit.VividCryptography.csproj" />
   </ItemGroup>
 
