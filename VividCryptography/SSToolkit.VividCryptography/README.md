@@ -1,23 +1,23 @@
 # VividCryptography
 VividCryptography: Encrypt/Decrypt and Hash
 
-Encryptor
----
+## Encryptor
 - Encrypt and decrypt plain text using Aes algorithm and Rfc2898Derive to create random bytes.
 
 
----
-Hashing
----
+<br>
+
+## Hashing
+
 - Compute a hash. (default: Sha256)
 - Salt (default: null) (Suggested: 128bytes) and interation (default: 1) (Suggested: 100000) can be added to hashing
 - Available algorithms (Md5, Sha1, Sha256, Sha384, Sha512)
 - Create random salt bytes (default size: 64) (Suggested: 128)
 - GetHashing string extension
 
----
-Usage:
---- 
+<br>
+
+## Usage
 
 Encrypt/Decrypt
 ```csharp

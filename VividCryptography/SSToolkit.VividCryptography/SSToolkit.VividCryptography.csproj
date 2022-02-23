@@ -15,6 +15,8 @@
 		<PackageTags>Hashing;Encryption;Decryption;Security</PackageTags>
 		<PackageReleaseNotes>Publishing</PackageReleaseNotes>
 		<VersionPrefix>1.1.0</VersionPrefix>
+		<AssemblyName>SSToolkit.VividCryptography</AssemblyName>
+		<RootNamespace>SSToolkit.VividCryptography</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
