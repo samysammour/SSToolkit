@@ -1,6 +1,8 @@
 ﻿# SSToolkit.Mail
 Mail helper project that provides a tested Emailing client
 
+> Install-Package SSToolkit.Mail
+
 ## EmailClient
 
 How to use:

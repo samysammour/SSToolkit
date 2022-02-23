@@ -1,6 +1,8 @@
 # VividCryptography
 VividCryptography: Encrypt/Decrypt and Hash
 
+> Install-Package SSToolkit.VividCryptography
+
 ## Encryptor
 - Encrypt and decrypt plain text using Aes algorithm and Rfc2898Derive to create random bytes.
 
