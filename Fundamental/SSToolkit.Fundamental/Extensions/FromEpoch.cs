@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Creates a datetime for the provided epoch value.

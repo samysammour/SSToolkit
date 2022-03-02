@@ -2,6 +2,8 @@
 {
     using Fundamental.Extensions;
     using Shouldly;
+    using System.Collections.Generic;
+    using System.Linq;
     using Xunit;
 
     public class AsTests
@@ -15,6 +17,15 @@
 
             sut = null;
             sut.As<AsTests>().ShouldBe(null);
+        }
+
+        [Fact]
+        public void AsList_Test()
+        {
+            var list = "as list".AsList();
+
+            list.Count.ShouldBe(1);
+            list.First().ShouldBe("as list");
         }
 
         [Fact]

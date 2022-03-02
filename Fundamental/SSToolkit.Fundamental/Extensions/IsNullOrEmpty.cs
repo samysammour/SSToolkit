@@ -4,7 +4,7 @@
     using System.IO;
     using System.Linq;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Check if <see cref="IEnumerable<TSource>"/> is null or empty

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Concatenates a specified separator String between each element of a specified enumeration, yielding a single

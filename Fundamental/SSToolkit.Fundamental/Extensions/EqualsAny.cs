@@ -1,11 +1,10 @@
 ﻿namespace SSToolkit.Fundamental.Extensions
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text.RegularExpressions;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Compares strings with usage of pattern *.

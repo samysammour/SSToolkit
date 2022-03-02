@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Performs an action on each value of the <see cref="IEnumerable<T>"/>

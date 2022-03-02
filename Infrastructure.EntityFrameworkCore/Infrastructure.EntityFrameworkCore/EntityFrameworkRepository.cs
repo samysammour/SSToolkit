@@ -1,0 +1,319 @@
+﻿namespace SSToolkit.Infrastructure.EntityFrameworkCore
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using SSToolkit.Domain.Repositories;
+    using SSToolkit.Domain.Repositories.Model;
+    using SSToolkit.Domain.Repositories.Specifications;
+    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
+    using SSToolkit.Fundamental.Extensions;
+    using Microsoft.EntityFrameworkCore;
+
+    public class EntityFrameworkRepository<TEntity> : IRepository<TEntity>
+        where TEntity : class, IEntity
+    {
+        private readonly DbContext dbContext;
+
+        public EntityFrameworkRepository(DbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        /// <summary>
+        /// Retrives entities from the repository
+        /// </summary>
+        /// <param name="options">Query specific options</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns><see cref="IEnumerable{T}"/></returns>
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        {
+            if (options?.HasOrders() == true)
+            {
+                return await this.dbContext.Set<TEntity>()
+                    .TrackChangesIf(options)
+                    .IncludeIf(options)
+                    .SkipIf(options?.Skip)
+                    .TakeIf(options?.Take)
+                    .OrderByIf(options).ToListAsyncSafe(cancellationToken).AnyContext();
+            }
+            else
+            {
+                return await this.dbContext.Set<TEntity>()
+                    .TrackChangesIf(options)
+                    .IncludeIf(options)
+                    .SkipIf(options?.Skip)
+                    .TakeIf(options?.Take).ToListAsyncSafe(cancellationToken).AnyContext();
+            }
+        }
+
+        /// <summary>
+        /// Retrives entities from the repository
+        /// </summary>
+        /// <param name="specification">The <see cref="IEnumerable{ISpecification{T}"/> to filter entites</param>
+        /// <param name="options">Query specific options</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns><see cref="IEnumerable{T}"/> matching the specification</returns>
+        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        {
+            if (options?.HasOrders() == true)
+            {
+                return await this.dbContext.Set<TEntity>()
+                    .TrackChangesIf(options)
+                    .IncludeIf(options)
+                    .WhereIf(specification?.ToExpression())
+                    .SkipIf(options?.Skip)
+                    .TakeIf(options?.Take)
+                    .OrderByIf(options).ToListAsyncSafe(cancellationToken).AnyContext();
+            }
+            else
+            {
+                return await this.dbContext.Set<TEntity>()
+                    .TrackChangesIf(options)
+                    .IncludeIf(options)
+                    .WhereIf(specification?.ToExpression())
+                    .SkipIf(options?.Skip)
+                    .TakeIf(options?.Take).ToListAsyncSafe(cancellationToken).AnyContext();
+            }
+        }
+
+        /// <summary>
+        /// Retrives entities from the repository
+        /// </summary>
+        /// <param name="specifications">The <see cref="IEnumerable{ISpecification{T}}"/> to filter entites</param>
+        /// <param name="options">Query specific options</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns><see cref="IEnumerable{T}"/> matching the specification</returns>
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        {
+            var expressions = specifications.Safe().Select(s => s.ToExpression());
+
+            if (options?.HasOrders() == true)
+            {
+                return await this.dbContext.Set<TEntity>()
+                    .TrackChangesIf(options)
+                    .IncludeIf(options)
+                    .WhereIf(expressions)
+                    .SkipIf(options?.Skip)
+                    .TakeIf(options?.Take)
+                    .OrderByIf(options).ToListAsyncSafe(cancellationToken).AnyContext();
+            }
+            else
+            {
+                return await this.dbContext.Set<TEntity>()
+                    .TrackChangesIf(options)
+                    .IncludeIf(options)
+                    .WhereIf(expressions)
+                    .SkipIf(options?.Skip)
+                    .TakeIf(options?.Take).ToListAsyncSafe(cancellationToken).AnyContext();
+            }
+        }
+
+        /// <summary>
+        /// Retrives entity from the repository
+        /// </summary>
+        /// <param name="id">entity id</param>
+        /// <returns>The entity that has the id</returns>
+        public async Task<TEntity> FindOneAsync(object id)
+        {
+            if (id.IsDefault())
+            {
+                return default;
+            }
+
+            return await this.dbContext.Set<TEntity>().FindAsync(this.CastObjectCheck(id)).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Check if entity exists
+        /// </summary>
+        /// <param name="id">entity id</param>
+        /// <returns>True if exist</returns>
+        public async Task<bool> ExistsAsync(object id)
+        {
+            if (id.IsDefault())
+            {
+                return false;
+            }
+
+            return await this.FindOneAsync(id).AnyContext() != null;
+        }
+
+        /// <summary>
+        /// Retrives first entity from the repository
+        /// </summary>
+        /// <param name="options">Query specific options</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns><see cref="object{T}"/></returns>
+        public async Task<TEntity> FindOneAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        {
+            return await this.dbContext.Set<TEntity>()
+                .TrackChangesIf(options)
+                .IncludeIf(options)
+                .SkipIf(options?.Skip)
+                .TakeIf(options?.Take)
+                .OrderByIf(options).FirstOrDefaultAsync(cancellationToken).AnyContext();
+        }
+
+        /// <summary>
+        /// Retrives first entity from the repository
+        /// </summary>
+        /// <param name="specification">The <see cref="IEnumerable{ISpecification{T}"/> to filter entites</param>
+        /// <param name="options">Query specific options</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns><see cref="object{T}"/> matching the specification</returns>
+        public async Task<TEntity> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        {
+            return await this.dbContext.Set<TEntity>()
+                .TrackChangesIf(options)
+                .IncludeIf(options)
+                .WhereIf(specification?.ToExpression())
+                .SkipIf(options?.Skip)
+                .TakeIf(options?.Take)
+                .OrderByIf(options).FirstOrDefaultAsync(cancellationToken).AnyContext();
+        }
+
+        /// <summary>
+        /// Retrives first entity from the repository
+        /// </summary>
+        /// <param name="specifications">The <see cref="IEnumerable{ISpecification{T}}"/> to filter entites</param>
+        /// <param name="options">Query specific options</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <returns><see cref="object{T}"/> matching the specification</returns>
+        public async Task<TEntity> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        {
+            var expressions = specifications.Safe().Select(s => s.ToExpression());
+
+            return await this.dbContext.Set<TEntity>()
+                .TrackChangesIf(options)
+                .IncludeIf(options)
+                .WhereIf(expressions)
+                .SkipIf(options?.Skip)
+                .TakeIf(options?.Take)
+                .OrderByIf(options).FirstOrDefaultAsync(cancellationToken).AnyContext();
+        }
+
+        /// <summary>
+        /// Inserts the provided entity.
+        /// </summary>
+        /// <param name="entity">The entity to insert.</param>
+        /// <returns></returns>
+        public async Task<TEntity> InsertAsync(TEntity entity)
+        {
+            var result = await this.UpsertAsync(entity).AnyContext();
+            return result.entity;
+        }
+
+        /// <summary>
+        /// Updates the provided entity.
+        /// </summary>
+        /// <param name="entity">The entity to update.</param>
+        /// <returns></returns>
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            var result = await this.UpsertAsync(entity).AnyContext();
+            return result.entity;
+        }
+
+        /// <summary>
+        /// Insert or updates the provided entity.
+        /// </summary>
+        /// <param name="entity">The entity to insert or update.</param>
+        /// <returns></returns>
+        public async Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity)
+        {
+            if (entity == null)
+            {
+                return (default, RepositoryActionResult.None);
+            }
+
+            bool isNew = entity.Id.IsDefault() || !await this.ExistsAsync(entity.Id).AnyContext();
+            if (isNew)
+            {
+                this.dbContext.Set<TEntity>().Add(entity);
+            }
+
+            await this.dbContext.SaveChangesAsync<TEntity>().AnyContext();
+
+#pragma warning disable SA1008 // Opening parenthesis must be spaced correctly
+            return isNew ?(entity, RepositoryActionResult.Inserted) : (entity, RepositoryActionResult.Updated);
+#pragma warning restore SA1008 // Opening parenthesis must be spaced correctly
+        }
+
+        /// <summary>
+        /// Delete entity matches the id
+        /// </summary>
+        /// <param name="id">The entity id</param>
+        /// <returns></returns>
+        public async Task<RepositoryActionResult> DeleteAsync(object id)
+        {
+            if (id.IsDefault())
+            {
+                return RepositoryActionResult.None;
+            }
+
+            var entity = await this.FindOneAsync(id).AnyContext();
+            if (entity != null)
+            {
+                this.dbContext.Remove(entity);
+                await this.dbContext.SaveChangesAsync().AnyContext();
+                return RepositoryActionResult.Deleted;
+            }
+
+            return RepositoryActionResult.None;
+        }
+
+        /// <summary>
+        /// Delete entity matches the id
+        /// </summary>
+        /// <param name="entity">The entity to delete</param>
+        /// <returns></returns>
+        public async Task<RepositoryActionResult> DeleteAsync(TEntity entity)
+        {
+            if (entity == null || entity.Id.IsDefault())
+            {
+                return RepositoryActionResult.None;
+            }
+
+            return await this.DeleteAsync(entity.Id).AnyContext();
+        }
+
+        private object CastObjectCheck(object value)
+        {
+            try
+            {
+                if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(Guid) && value?.GetType() == typeof(string))
+                {
+                    value = Guid.Parse(value.ToString());
+                }
+
+                if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(int) && value?.GetType() == typeof(int))
+                {
+                    value = int.Parse(value.ToString());
+                }
+
+                if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(float) && value?.GetType() == typeof(float))
+                {
+                    value = float.Parse(value.ToString());
+                }
+
+                if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(double) && value?.GetType() == typeof(double))
+                {
+                    value = double.Parse(value.ToString());
+                }
+
+                if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(string) && value?.GetType() == typeof(string))
+                {
+                    value = value.ToString();
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException(ex.Message, ex);
+            }
+
+            return value;
+        }
+    }
+}

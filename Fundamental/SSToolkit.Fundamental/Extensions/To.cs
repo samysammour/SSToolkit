@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.Globalization;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Converts an object to a value type using <see cref="Convert.ChangeType(object,TypeCode)" /></summary>

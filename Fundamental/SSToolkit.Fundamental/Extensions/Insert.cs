@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Also adds the item to the result list.

@@ -3,7 +3,7 @@
     using System.Diagnostics;
     using System.Text.RegularExpressions;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         [DebuggerStepThrough]
         public static bool IsBase64(this string source)

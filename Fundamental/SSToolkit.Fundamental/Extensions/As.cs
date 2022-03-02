@@ -1,9 +1,10 @@
 ﻿namespace SSToolkit.Fundamental.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Simplifies casting an object to a type.
@@ -28,6 +29,24 @@
             {
                 return default;
             }
+        }
+
+        /// <summary>
+        /// Convert object into a list containing this object.
+        /// </summary>
+        /// <typeparam name="T">The type to be casted.</typeparam>
+        /// <param name="source">The object to convert to list.</param>
+        /// <returns>List containing the object.</returns>
+        [DebuggerStepThrough]
+        public static List<T> AsList<T>(this T source)
+            where T : class
+        {
+            if (source == null)
+            {
+                return default;
+            }
+
+            return new List<T> { source };
         }
 
         /// <summary>

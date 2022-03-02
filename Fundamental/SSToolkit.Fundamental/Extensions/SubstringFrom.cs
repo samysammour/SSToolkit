@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Substring after the first hit of a certain string

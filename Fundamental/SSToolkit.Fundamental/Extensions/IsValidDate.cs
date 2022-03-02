@@ -1,9 +1,8 @@
 ﻿namespace SSToolkit.Fundamental.Extensions
 {
     using System;
-    using System.Collections.Generic;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Validate a string to be a valid date

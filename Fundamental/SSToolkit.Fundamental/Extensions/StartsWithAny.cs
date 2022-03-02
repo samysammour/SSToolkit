@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Check if the string starts with any of the items

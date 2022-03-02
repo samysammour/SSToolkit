@@ -3,31 +3,42 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VividCryptography", "VividCryptography", "{7323C3A3-BB1C-4C35-A46D-66751E05BBB6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. VividCryptography", "2. VividCryptography", "{7323C3A3-BB1C-4C35-A46D-66751E05BBB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.VividCryptography", "VividCryptography\SSToolkit.VividCryptography\SSToolkit.VividCryptography.csproj", "{ECF7D20E-0C80-4716-B440-C74B04BAC236}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.VividCryptography.Tests", "VividCryptography\SSToolkit.VividCryptography.Tests\SSToolkit.VividCryptography.Tests.csproj", "{6D773583-FED3-4E17-882B-EF6A8D869C19}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{BB94D5BC-6043-4A82-96D2-5817770857E1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Docs", "0. Docs", "{BB94D5BC-6043-4A82-96D2-5817770857E1}"
 	ProjectSection(SolutionItems) = preProject
 		Docs\NuGet Publishing.md = Docs\NuGet Publishing.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fundamental", "Fundamental", "{2F6FC63D-6E4A-4D26-A334-C0FD0F5B2DEE}"
-	ProjectSection(SolutionItems) = preProject
-		Docs\NuGet Publishing.md = Docs\NuGet Publishing.md
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Fundamental", "1. Fundamental", "{2F6FC63D-6E4A-4D26-A334-C0FD0F5B2DEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Fundamental", "Fundamental\SSToolkit.Fundamental\SSToolkit.Fundamental.csproj", "{229ABC77-B87D-4BE4-B91F-E0DBB23829D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Fundamental.Tests", "Fundamental\SSToolkit.Fundamental.Tests\SSToolkit.Fundamental.Tests.csproj", "{2E8E27E5-D6DC-4CC2-9BE6-92DC1ED2BE1B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mail", "Mail", "{C73B4100-3F4B-4611-8CF4-B13299C05ED6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Mail", "3. Mail", "{C73B4100-3F4B-4611-8CF4-B13299C05ED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Mail", "Mail\SSToolkit.Mail\SSToolkit.Mail.csproj", "{5E5DBBD8-E51B-48FE-A505-3E1DAEE76EDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Mail", "Mail\SSToolkit.Mail\SSToolkit.Mail.csproj", "{5E5DBBD8-E51B-48FE-A505-3E1DAEE76EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Mail.Tests", "Mail\SSToolkit.Mail.Tests\SSToolkit.Mail.Tests.csproj", "{72A4AEDB-B9F3-4AC2-A8FE-8D85C4BF3E0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Mail.Tests", "Mail\SSToolkit.Mail.Tests\SSToolkit.Mail.Tests.csproj", "{72A4AEDB-B9F3-4AC2-A8FE-8D85C4BF3E0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Domain.Repositories", "4. Domain.Repositories", "{A57F01CD-B4FE-4023-9D05-E301F68F5F0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Domain.Repositories", "Domain.Repositories\SSToolkit.Domain.Repositories\SSToolkit.Domain.Repositories.csproj", "{3A8AF354-B33E-42C4-A770-0EC4B3F0D7FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Domain.Repositories.Tests", "Domain.Repositories\SSToolkit.Domain.Repositories.Tests\SSToolkit.Domain.Repositories.Tests.csproj", "{8A068C87-8AA5-46E9-925A-A40AF2479AA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Infrastructure.EntityFrameworkCore", "5. Infrastructure.EntityFrameworkCore", "{99ECB76D-6111-4DF2-BFC6-398B78C49551}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore", "Infrastructure.EntityFrameworkCore\Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.csproj", "{7AC9BAEC-7BB2-487E-985A-0E8B475B9F76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Tests", "Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Tests\SSToolkit.Infrastructure.EntityFrameworkCore.Tests.csproj", "{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{929FAB22-F9EC-45CC-B195-1D1D507F8346}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +70,26 @@ Global
 		{72A4AEDB-B9F3-4AC2-A8FE-8D85C4BF3E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72A4AEDB-B9F3-4AC2-A8FE-8D85C4BF3E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72A4AEDB-B9F3-4AC2-A8FE-8D85C4BF3E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A8AF354-B33E-42C4-A770-0EC4B3F0D7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A8AF354-B33E-42C4-A770-0EC4B3F0D7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A8AF354-B33E-42C4-A770-0EC4B3F0D7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A8AF354-B33E-42C4-A770-0EC4B3F0D7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A068C87-8AA5-46E9-925A-A40AF2479AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A068C87-8AA5-46E9-925A-A40AF2479AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A068C87-8AA5-46E9-925A-A40AF2479AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A068C87-8AA5-46E9-925A-A40AF2479AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC9BAEC-7BB2-487E-985A-0E8B475B9F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC9BAEC-7BB2-487E-985A-0E8B475B9F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC9BAEC-7BB2-487E-985A-0E8B475B9F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC9BAEC-7BB2-487E-985A-0E8B475B9F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +101,10 @@ Global
 		{2E8E27E5-D6DC-4CC2-9BE6-92DC1ED2BE1B} = {2F6FC63D-6E4A-4D26-A334-C0FD0F5B2DEE}
 		{5E5DBBD8-E51B-48FE-A505-3E1DAEE76EDD} = {C73B4100-3F4B-4611-8CF4-B13299C05ED6}
 		{72A4AEDB-B9F3-4AC2-A8FE-8D85C4BF3E0E} = {C73B4100-3F4B-4611-8CF4-B13299C05ED6}
+		{3A8AF354-B33E-42C4-A770-0EC4B3F0D7FE} = {A57F01CD-B4FE-4023-9D05-E301F68F5F0B}
+		{8A068C87-8AA5-46E9-925A-A40AF2479AA8} = {A57F01CD-B4FE-4023-9D05-E301F68F5F0B}
+		{7AC9BAEC-7BB2-487E-985A-0E8B475B9F76} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
+		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C1F0F69-BA35-42EC-8E34-35C783804973}

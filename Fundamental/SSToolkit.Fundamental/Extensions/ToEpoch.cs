@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Returns the number of seconds that have elapsed since 1970-01-01T00:00:00Z.

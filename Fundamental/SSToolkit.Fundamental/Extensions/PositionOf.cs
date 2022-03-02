@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Finds the index of the first item matching an expression in an enumerable.

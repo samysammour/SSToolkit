@@ -4,7 +4,7 @@
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Accept any awaiter used to await <see cref="Task"/>. Sets continueOnCapturedContext to false

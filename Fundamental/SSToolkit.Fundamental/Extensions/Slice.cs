@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Slice from a string to a string

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Get value or default of dictionary

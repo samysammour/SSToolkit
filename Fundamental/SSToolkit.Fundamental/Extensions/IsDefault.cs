@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Check if <see cref="object"/> has a default value

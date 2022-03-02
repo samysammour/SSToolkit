@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Returns a <c>Base64</c> encoded <see cref="Guid"/>.

@@ -1,6 +1,6 @@
 ﻿namespace SSToolkit.Fundamental.Extensions
 {
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Safeky compares the source to the value string

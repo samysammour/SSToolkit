@@ -1,10 +1,8 @@
 ﻿namespace SSToolkit.Fundamental.Extensions
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         /// <summary>
         /// Check if Guid is null or empty

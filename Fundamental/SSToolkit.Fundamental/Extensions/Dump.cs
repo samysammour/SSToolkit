@@ -5,7 +5,7 @@
     using Newtonsoft.Json.Converters;
     using Newtonsoft.Json.Serialization;
 
-    public static partial class Extensions
+    public static partial class ExtensionHelpers
     {
         private static JsonSerializerSettings CamelCasedJsonSettings => new JsonSerializerSettings
         {
