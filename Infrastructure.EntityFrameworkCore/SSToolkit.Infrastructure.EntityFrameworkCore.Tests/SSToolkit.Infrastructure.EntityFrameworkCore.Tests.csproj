@@ -25,7 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain.Repositories\SSToolkit.Domain.Repositories\SSToolkit.Domain.Repositories.csproj" />
     <ProjectReference Include="..\..\Fundamental\SSToolkit.Fundamental\SSToolkit.Fundamental.csproj" />
-    <ProjectReference Include="..\Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\SSToolkit.Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@
     using SSToolkit.Domain.Repositories;
     using SSToolkit.Domain.Repositories.Model;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// Order by if orders have been provided to <see cref="IFindOptions<T>"/>

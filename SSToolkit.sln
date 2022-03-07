@@ -36,9 +36,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Infrastructure.EntityFra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Tests", "Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Tests\SSToolkit.Infrastructure.EntityFrameworkCore.Tests.csproj", "{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{929FAB22-F9EC-45CC-B195-1D1D507F8346}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore", "Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.csproj", "{DE5E3076-B837-4F8D-B813-FA91E56149A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Infrastructure.Azure.CosmosDb", "6. Infrastructure.Azure.CosmosDb", "{6CFEE93A-29E1-434D-87F0-6EA003ECF066}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.Azure.CosmosDb", "Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb.csproj", "{2DA0F294-CD7B-4E74-8DA2-60BBA6AEB1A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.Azure.CosmosDb.Tests", "Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb.Tests\SSToolkit.Infrastructure.Azure.CosmosDb.Tests.csproj", "{C619A6CC-A9AF-4A0A-9F59-6FE45B851373}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Reference", "Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Reference\SSToolkit.Infrastructure.EntityFrameworkCore.Reference.csproj", "{F3207793-8BF7-4A5B-AEDC-26E8612F979C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.Azure.CosmosDb.Reference", "Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb.Reference\SSToolkit.Infrastructure.Azure.CosmosDb.Reference.csproj", "{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,14 +90,26 @@ Global
 		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{929FAB22-F9EC-45CC-B195-1D1D507F8346}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE5E3076-B837-4F8D-B813-FA91E56149A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE5E3076-B837-4F8D-B813-FA91E56149A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE5E3076-B837-4F8D-B813-FA91E56149A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE5E3076-B837-4F8D-B813-FA91E56149A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA0F294-CD7B-4E74-8DA2-60BBA6AEB1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA0F294-CD7B-4E74-8DA2-60BBA6AEB1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA0F294-CD7B-4E74-8DA2-60BBA6AEB1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA0F294-CD7B-4E74-8DA2-60BBA6AEB1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C619A6CC-A9AF-4A0A-9F59-6FE45B851373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C619A6CC-A9AF-4A0A-9F59-6FE45B851373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C619A6CC-A9AF-4A0A-9F59-6FE45B851373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C619A6CC-A9AF-4A0A-9F59-6FE45B851373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3207793-8BF7-4A5B-AEDC-26E8612F979C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3207793-8BF7-4A5B-AEDC-26E8612F979C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3207793-8BF7-4A5B-AEDC-26E8612F979C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3207793-8BF7-4A5B-AEDC-26E8612F979C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +125,10 @@ Global
 		{8A068C87-8AA5-46E9-925A-A40AF2479AA8} = {A57F01CD-B4FE-4023-9D05-E301F68F5F0B}
 		{3E10FAFD-9F3C-4CA3-8591-0F1BC0EF243C} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
 		{DE5E3076-B837-4F8D-B813-FA91E56149A6} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
+		{2DA0F294-CD7B-4E74-8DA2-60BBA6AEB1A6} = {6CFEE93A-29E1-434D-87F0-6EA003ECF066}
+		{C619A6CC-A9AF-4A0A-9F59-6FE45B851373} = {6CFEE93A-29E1-434D-87F0-6EA003ECF066}
+		{F3207793-8BF7-4A5B-AEDC-26E8612F979C} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
+		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0} = {6CFEE93A-29E1-434D-87F0-6EA003ECF066}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C1F0F69-BA35-42EC-8E34-35C783804973}

@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// To list async after checking the source if null

@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<SignAssembly>False</SignAssembly>
 		<LangVersion>10</LangVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -14,7 +13,7 @@
 		<Description>SSToolkit.Infrastructure.EntityFrameworkCore for generic entity framework with Specification pattern. Suitable for DDD or other DIY principles</Description>
 		<PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Infrastructure.EntityFrameworkCore</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Domain.Repositories</RepositoryUrl>
+		<RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Infrastructure.EntityFrameworkCore</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>EntityFrameworkCore;EFCore;Repository;Repositories;GenericRepository;FindOptions;DDD;DIY;DbContext</PackageTags>
 		<PackageReleaseNotes>Publishing</PackageReleaseNotes>
@@ -25,6 +24,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
   </ItemGroup>
 

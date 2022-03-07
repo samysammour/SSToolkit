@@ -18,7 +18,7 @@
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity to save.</typeparam>
         /// <param name="source">The source.</param>
-        public static async Task<int> SaveChangesAsync<TEntity>(this DbContext source)
+        public static async Task<int> SaveChangesAsync<TEntity>(this DbContext source, CancellationToken cancellationToken = default)
             where TEntity : class, IEntity
         {
             if (source == null)
@@ -43,7 +43,7 @@
                 entry.State = EntityState.Unchanged;
             }
 
-            var result = await source.SaveChangesAsync().AnyContext();
+            var result = await source.SaveChangesAsync(cancellationToken).AnyContext();
 
             // set all other aggregates to original state
             foreach (var state in other)

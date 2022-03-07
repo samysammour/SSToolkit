@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// Take if the value > 0

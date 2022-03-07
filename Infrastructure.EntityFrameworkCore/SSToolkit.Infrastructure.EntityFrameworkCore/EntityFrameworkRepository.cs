@@ -115,14 +115,14 @@
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>The entity that has the id</returns>
-        public async Task<TEntity> FindOneAsync(object id)
+        public async Task<TEntity> FindOneAsync(object id, CancellationToken cancellationToken = default)
         {
             if (id.IsDefault())
             {
                 return default;
             }
 
-            return await this.dbContext.Set<TEntity>().FindAsync(this.CastObjectCheck(id)).ConfigureAwait(false);
+            return await this.dbContext.Set<TEntity>().FindAsync(new[] { this.CastObjectCheck(id) }, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -130,14 +130,14 @@
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>True if exist</returns>
-        public async Task<bool> ExistsAsync(object id)
+        public async Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default)
         {
             if (id.IsDefault())
             {
                 return false;
             }
 
-            return await this.FindOneAsync(id).AnyContext() != null;
+            return await this.FindOneAsync(id, cancellationToken).AnyContext() != null;
         }
 
         /// <summary>
@@ -199,9 +199,9 @@
         /// </summary>
         /// <param name="entity">The entity to insert.</param>
         /// <returns></returns>
-        public async Task<TEntity> InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            var result = await this.UpsertAsync(entity).AnyContext();
+            var result = await this.UpsertAsync(entity, cancellationToken).AnyContext();
             return result.entity;
         }
 
@@ -210,9 +210,9 @@
         /// </summary>
         /// <param name="entity">The entity to update.</param>
         /// <returns></returns>
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            var result = await this.UpsertAsync(entity).AnyContext();
+            var result = await this.UpsertAsync(entity, cancellationToken).AnyContext();
             return result.entity;
         }
 
@@ -221,20 +221,20 @@
         /// </summary>
         /// <param name="entity">The entity to insert or update.</param>
         /// <returns></returns>
-        public async Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity)
+        public async Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity == null)
             {
                 return (default, RepositoryActionResult.None);
             }
 
-            bool isNew = entity.Id.IsDefault() || !await this.ExistsAsync(entity.Id).AnyContext();
+            bool isNew = entity.Id.IsDefault() || !await this.ExistsAsync(entity.Id, cancellationToken).AnyContext();
             if (isNew)
             {
                 this.dbContext.Set<TEntity>().Add(entity);
             }
 
-            await this.dbContext.SaveChangesAsync<TEntity>().AnyContext();
+            await this.dbContext.SaveChangesAsync<TEntity>(cancellationToken).AnyContext();
 
 #pragma warning disable SA1008 // Opening parenthesis must be spaced correctly
             return isNew ?(entity, RepositoryActionResult.Inserted) : (entity, RepositoryActionResult.Updated);
@@ -246,18 +246,18 @@
         /// </summary>
         /// <param name="id">The entity id</param>
         /// <returns></returns>
-        public async Task<RepositoryActionResult> DeleteAsync(object id)
+        public async Task<RepositoryActionResult> DeleteAsync(object id, CancellationToken cancellationToken = default)
         {
             if (id.IsDefault())
             {
                 return RepositoryActionResult.None;
             }
 
-            var entity = await this.FindOneAsync(id).AnyContext();
+            var entity = await this.FindOneAsync(id, cancellationToken).AnyContext();
             if (entity != null)
             {
                 this.dbContext.Remove(entity);
-                await this.dbContext.SaveChangesAsync().AnyContext();
+                await this.dbContext.SaveChangesAsync(cancellationToken).AnyContext();
                 return RepositoryActionResult.Deleted;
             }
 
@@ -269,14 +269,48 @@
         /// </summary>
         /// <param name="entity">The entity to delete</param>
         /// <returns></returns>
-        public async Task<RepositoryActionResult> DeleteAsync(TEntity entity)
+        public async Task<RepositoryActionResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity == null || entity.Id.IsDefault())
             {
                 return RepositoryActionResult.None;
             }
 
-            return await this.DeleteAsync(entity.Id).AnyContext();
+            return await this.DeleteAsync(entity.Id, cancellationToken).AnyContext();
+        }
+
+        /// <summary>
+        /// Counts all entities.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public async Task<int> CountAsync(CancellationToken cancellationToken = default)
+        {
+            return await this.dbContext.Set<TEntity>().CountAsync(cancellationToken).AnyContext();
+        }
+
+        /// <summary>
+        /// Counts all entities.
+        /// </summary>
+        /// <param name="specification">The specification.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public async Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+        {
+            return await this.dbContext.Set<TEntity>()
+                        .WhereIf(specification?.ToExpression())
+                        .CountAsync(cancellationToken).AnyContext();
+        }
+
+        /// <summary>
+        /// Counts all entities.
+        /// </summary>
+        /// <param name="specifications">The specifications.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public async Task<int> CountAsync(IEnumerable<ISpecification<TEntity>> specifications, CancellationToken cancellationToken = default)
+        {
+            var expressions = specifications.Safe().Select(s => s.ToExpression());
+            return await this.dbContext.Set<TEntity>()
+                       .WhereIf(expressions)
+                       .CountAsync(cancellationToken).AnyContext();
         }
 
         private object CastObjectCheck(object value)

@@ -17,6 +17,7 @@
         /// <value>
         /// The identifier.
         /// </value>
+        [JsonProperty(PropertyName = "id")]
         public T Id { get; set; }
 
         /// <summary>
@@ -30,15 +31,7 @@
         {
             get => this.Id;
             set => this.Id = (T)value;
-    }
-
-        /// <summary>
-        /// Gets the type of the entity (discriminator).
-        /// </summary>
-        /// <value>
-        /// The type of the entity.
-        /// </value>
-        public string Discriminator => this.GetType().FullPrettyName();
+        }
 
 
         /// <summary>

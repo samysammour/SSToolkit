@@ -56,7 +56,7 @@
             => BitConverter.ToInt64(source.ToByteArray(), 0);
 
         [DebuggerStepThrough]
-        public static Guid? ToGuid(this string source)
+        public static Guid? ToNullableGuid(this string source)
         {
             if (source.IsNullOrEmpty())
             {
@@ -74,6 +74,66 @@
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Convert string to Guid
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public static Guid ToGuid(this string source)
+        {
+            if (source.IsNullOrEmpty())
+            {
+                return default;
+            }
+
+            if (source.IsBase64())
+            {
+                return new Guid(Convert.FromBase64String(source));
+            }
+
+            if (Guid.TryParse(source, out var parsedResult))
+            {
+                return parsedResult;
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Check if string is valid Guid
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns><c>true</c> if valid; otherwise, <c>false</c></returns>
+        [DebuggerStepThrough]
+        public static bool IsValidGuid(this string source)
+        {
+            if (source.IsNullOrEmpty())
+            {
+                return false;
+            }
+
+
+            return Guid.TryParse(source, out var _);
+        }
+
+        /// <summary>
+        /// Check if object is valid Guid
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns><c>true</c> if valid; otherwise, <c>false</c></returns>
+        [DebuggerStepThrough]
+        public static bool IsValidGuid(this object source)
+        {
+            if (source == null)
+            {
+                return false;
+            }
+
+
+            return Guid.TryParse(source.ToString(), out var _);
         }
     }
 }

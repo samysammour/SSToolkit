@@ -6,7 +6,7 @@
     using SSToolkit.Domain.Repositories.Model;
     using SSToolkit.Fundamental.Extensions;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// Include if includes have been provided to <see cref="IFindOptions<T>"/>

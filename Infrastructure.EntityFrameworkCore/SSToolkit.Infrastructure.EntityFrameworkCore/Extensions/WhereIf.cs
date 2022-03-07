@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// Where expression when expression is provided

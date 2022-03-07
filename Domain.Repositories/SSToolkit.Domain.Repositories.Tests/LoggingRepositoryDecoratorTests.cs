@@ -292,6 +292,55 @@ namespace SSToolkit.Domain.Repositories.Tests
             this.logger.Received(1).LogInformation($"{typeof(StubEntity)} {stub.Id} is {result.action}");
         }
 
+        [Fact]
+        public void CountAsync_Test()
+        {
+            // Arrange
+
+            // Act
+            this.decoratee.CountAsync().Returns(1);
+            this.decorated.CountAsync().Wait();
+
+            // Assert
+            this.logger.Received(1);
+            this.logger.Received(1).LogInformation($"Get counts fors {typeof(StubEntity)}.");
+        }
+
+        [Fact]
+        public void CountAsync_WithSpecification_Test()
+        {
+            // Arrange
+            var specification = new Specification<StubEntity>(x => x.FirstName == "Name");
+
+            // Act
+            this.decoratee.CountAsync().Returns(1);
+            this.decorated.CountAsync(specification).Wait();
+
+            // Assert
+            this.logger.Received(1);
+            this.logger.Received(1).LogInformation($"Get counts fors {typeof(StubEntity)}. Specification: {specification}.");
+        }
+
+        [Fact]
+        public void CountAsync_WithSpecifications_Test()
+        {
+            // Arrange
+            var specifications = new List<Specification<StubEntity>>
+            {
+                new Specification<StubEntity>(x => x.FirstName == "Name"),
+                new Specification<StubEntity>(x => x.LastName == "Name")
+            };
+
+            // Act
+            this.decoratee.CountAsync().Returns(1);
+            this.decorated.CountAsync(specifications).Wait();
+
+            // Assert
+            this.logger.Received(1);
+            this.logger.Received(1).LogInformation(string.Format("Get counts fors {0}. Specification: {1}. Specification: {2}.",
+                    typeof(StubEntity), specifications.First().ToString(), specifications.Last().ToString()));
+        }
+
         public class StubEntity : Entity
         {
             public string FirstName { get; set; }

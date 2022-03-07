@@ -210,6 +210,45 @@ namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
             }
         }
 
+        [Fact]
+        public async Task Count_Test()
+        {
+            using (var context = new StubDbContext())
+            {
+                var sut = this.CreateRepository(context);
+
+                (await sut.CountAsync()).ShouldBe(10);
+            }
+        }
+
+        [Fact]
+        public async Task Count_WithSpecification_Test()
+        {
+            using (var context = new StubDbContext())
+            {
+                var sut = this.CreateRepository(context);
+                var specification = new Specification<Stub>(x => x.Age > 5);
+
+                (await sut.CountAsync(specification)).ShouldBe(5);
+            }
+        }
+
+        [Fact]
+        public async Task Count_WithSpecifications_Test()
+        {
+            using (var context = new StubDbContext())
+            {
+                var sut = this.CreateRepository(context);
+                var specifications = new List<Specification<Stub>>
+                {
+                    new Specification<Stub>(x => x.FirstName == "FirstName 5" || x.FirstName == "FirstName 6"),
+                    new Specification<Stub>(x => x.Age == 5)
+                };
+
+                (await sut.CountAsync(specifications)).ShouldBe(1);
+            }
+        }
+
         private EntityFrameworkRepository<Stub> CreateRepository(StubDbContext dbContext)
             => EntityFrameworkRepositoryFactory.Create<Stub>(dbContext)
                 as EntityFrameworkRepository<Stub>;

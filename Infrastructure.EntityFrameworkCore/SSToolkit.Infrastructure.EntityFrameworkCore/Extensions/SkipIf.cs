@@ -4,7 +4,7 @@
     using System.Linq;
     using SSToolkit.Domain.Repositories.Model;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// Skip if the value is provided

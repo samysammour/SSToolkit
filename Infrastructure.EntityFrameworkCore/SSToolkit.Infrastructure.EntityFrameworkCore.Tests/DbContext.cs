@@ -24,7 +24,7 @@
                 var stub = new Stub()
                 {
                     Id = Guid.NewGuid(),
-                    Age = i % 5,
+                    Age = i,
                     FirstName = $"FirstName {i}",
                     LastName = $"LastName {i}",
                     NestedStubs = new List<NestedStub>

@@ -45,14 +45,14 @@
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>The entity that has the id</returns>
-        Task<TEntity> FindOneAsync(object id);
+        Task<TEntity> FindOneAsync(object id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Check if entity exists
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>True if exist</returns>
-        Task<bool> ExistsAsync(object id);
+        Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrives first entity from the repository
@@ -85,34 +85,54 @@
         /// </summary>
         /// <param name="entity">The entity to insert.</param>
         /// <returns></returns>
-        Task<TEntity> InsertAsync(TEntity entity);
+        Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates the provided entity.
         /// </summary>
         /// <param name="entity">The entity to update.</param>
         /// <returns></returns>
-        Task<TEntity> UpdateAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Insert or updates the provided entity.
         /// </summary>
         /// <param name="entity">The entity to insert or update.</param>
         /// <returns></returns>
-        Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity);
+        Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete entity matches the id
         /// </summary>
         /// <param name="id">The entity id</param>
         /// <returns></returns>
-        Task<RepositoryActionResult> DeleteAsync(object id);
+        Task<RepositoryActionResult> DeleteAsync(object id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete entity matches the id
         /// </summary>
         /// <param name="entity">The entity to delete</param>
         /// <returns></returns>
-        Task<RepositoryActionResult> DeleteAsync(TEntity entity);
+        Task<RepositoryActionResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Counts all entities.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        Task<int> CountAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Counts all entities.
+        /// </summary>
+        /// <param name="specification">The specification.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Counts all entities.
+        /// </summary>
+        /// <param name="specifications">The specifications.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        Task<int> CountAsync(IEnumerable<ISpecification<TEntity>> specifications, CancellationToken cancellationToken = default);
     }
 }
