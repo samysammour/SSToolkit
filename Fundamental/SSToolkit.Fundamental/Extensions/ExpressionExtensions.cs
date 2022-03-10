@@ -5,6 +5,19 @@
 
     public static class ExpressionExtensions
     {
+        public static string GetPropertyName<T>(this Expression expression)
+        {
+            switch (expression.NodeType)
+            {
+                case ExpressionType.MemberAccess:
+                    return ((MemberExpression)expression).Member.Name;
+                case ExpressionType.Convert:
+                    return ((UnaryExpression)expression).Operand.GetPropertyName<T>();
+                default:
+                    throw new NotSupportedException(expression.NodeType.ToString());
+            }
+        }
+
         public static string ToExpressionString<T>(this Expression<Func<T, bool>> source)
         {
             if (source != null)

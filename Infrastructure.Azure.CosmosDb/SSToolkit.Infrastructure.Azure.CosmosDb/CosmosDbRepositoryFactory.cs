@@ -21,9 +21,10 @@
         /// <param name="partitionKey">Partition key</param>
         /// <param name="container">Container name (default: Entity pretty name)</param>
         /// <param name="throughPut">Through Put (default: 400)</param>
+        /// <param name="indexingPolicy">Indexing policy (default: null)</param>
         /// <returns>Create CosmosDbRepository repository instance for <see cref="Entity{T}"/></returns>
         public static ICosmosDbRepository<TEntity> Create<TEntity>(string connectionString, string partitionKey,
-            string database = null, string container = null, int throughPut = 400)
+            string database = null, string container = null, int throughPut = 400, IndexingPolicy indexingPolicy = null)
             where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
             => new CosmosDbRepository<TEntity>(new CosmosDbRepositoryOptions<TEntity>()
             {
@@ -32,7 +33,8 @@
                 Database = database,
                 ContainerName = container,
                 PartitionKey = partitionKey,
-                ThroughPut = throughPut
+                ThroughPut = throughPut,
+                IndexingPolicy = indexingPolicy
             });
 
         /// <summary>
@@ -44,19 +46,21 @@
         /// <param name="partitionKey">Partition key</param>
         /// <param name="container">Container name (default: Entity pretty name)</param>
         /// <param name="throughPut">Through Put (default: 400)</param>
+        /// <param name="indexingPolicy">Indexing policy (default: null)</param>
         /// <returns>Create CosmosDbRepository repository instance for <see cref="Entity{T}"/></returns>
-        public static ICosmosDbRepository<TEntity> Create<TEntity>(string connectionString, Expression<Func<TEntity, object>> partitionKey, 
-            string database = null, string container = null, int throughPut = 400)
+        public static ICosmosDbRepository<TEntity> Create<TEntity>(string connectionString, Expression<Func<TEntity, object>> partitionKey,
+            string database = null, string container = null, int throughPut = 400, IndexingPolicy indexingPolicy = null)
             where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
             => new CosmosDbRepository<TEntity>(new CosmosDbRepositoryOptions<TEntity>()
-                {
-                    ConnectionString = connectionString,
-                    Client = new CosmosClient(connectionString),
-                    Database = database,
-                    ContainerName = container,
-                    PartitionKeyExpression = partitionKey,
-                    ThroughPut = throughPut
-                });
+            {
+                ConnectionString = connectionString,
+                Client = new CosmosClient(connectionString),
+                Database = database,
+                ContainerName = container,
+                PartitionKeyExpression = partitionKey,
+                ThroughPut = throughPut,
+                IndexingPolicy = indexingPolicy
+            });
 
         /// <summary>
         /// Create ICosmosDbRepository instance for <see cref="Entity{T}"/>
@@ -67,18 +71,20 @@
         /// <param name="partitionKey">Partition key</param>
         /// <param name="container">Container name (default: Entity pretty name)</param>
         /// <param name="throughPut">Through Put (default: 400)</param>
+        /// <param name="indexingPolicy">Indexing policy (default: null)</param>
         /// <returns>Create CosmosDbRepository repository instance for <see cref="Entity{T}"/></returns>
         public static ICosmosDbRepository<TEntity> Create<TEntity>(CosmosClient client, string partitionKey,
-            string database = null, string container = null, int throughPut = 400)
+            string database = null, string container = null, int throughPut = 400, IndexingPolicy indexingPolicy = null)
             where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
             => new CosmosDbRepository<TEntity>(new CosmosDbRepositoryOptions<TEntity>()
-                {
-                    Client = client,
-                    Database = database,
-                    ContainerName = container,
-                    PartitionKey = partitionKey,
-                    ThroughPut = throughPut
-                });
+            {
+                Client = client,
+                Database = database,
+                ContainerName = container,
+                PartitionKey = partitionKey,
+                ThroughPut = throughPut,
+                IndexingPolicy = indexingPolicy
+            });
 
         /// <summary>
         /// Create ICosmosDbRepository instance for <see cref="Entity{T}"/>
@@ -89,9 +95,10 @@
         /// <param name="partitionKey">Partition key</param>
         /// <param name="container">Container name (default: Entity pretty name)</param>
         /// <param name="throughPut">Through Put (default: 400)</param>
+        /// <param name="indexingPolicy">Indexing policy (default: null)</param>
         /// <returns>Create CosmosDbRepository repository instance for <see cref="Entity{T}"/></returns>
         public static ICosmosDbRepository<TEntity> Create<TEntity>(CosmosClient client, Expression<Func<TEntity, object>> partitionKey,
-            string database = null, string container = null, int throughPut = 400)
+            string database = null, string container = null, int throughPut = 400, IndexingPolicy indexingPolicy = null)
             where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
             => new CosmosDbRepository<TEntity>(new CosmosDbRepositoryOptions<TEntity>()
             {
@@ -99,7 +106,8 @@
                 Database = database,
                 ContainerName = container,
                 PartitionKeyExpression = partitionKey,
-                ThroughPut = throughPut
+                ThroughPut = throughPut,
+                IndexingPolicy = indexingPolicy
             });
 
         /// <summary>
@@ -112,26 +120,28 @@
         /// <param name="partitionKey">Partition key</param>
         /// <param name="container">Container name (default: Entity pretty name)</param>
         /// <param name="throughPut">Through Put (default: 400)</param>
+        /// <param name="indexingPolicy">Indexing policy (default: null)</param>
         /// <returns>Create CosmosDbRepository repository instance for <see cref="Entity{T}"/></returns>
         public static ICosmosDbRepository<TEntity> Create<TEntity>(string endpointUri, string authKeyOrResourceToken,
-            string partitionKey, string database = null, string container = null, int throughPut = 400)
+            string partitionKey, string database = null, string container = null, int throughPut = 400, IndexingPolicy indexingPolicy = null)
             where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
             => new CosmosDbRepository<TEntity>(new CosmosDbRepositoryOptions<TEntity>()
-                {
-                    EndPointUri = endpointUri,
-                    AccountKey = authKeyOrResourceToken,
-                    Client = new CosmosClient(endpointUri, authKeyOrResourceToken),
-                    Database = database,
-                    ContainerName = container,
-                    PartitionKey = partitionKey,
-                    ThroughPut = throughPut
-                });
+            {
+                EndPointUri = endpointUri,
+                AccountKey = authKeyOrResourceToken,
+                Client = new CosmosClient(endpointUri, authKeyOrResourceToken),
+                Database = database,
+                ContainerName = container,
+                PartitionKey = partitionKey,
+                ThroughPut = throughPut,
+                IndexingPolicy = indexingPolicy
+            });
 
         /// <summary>
         /// Create ICosmosDbRepository instance for <see cref="Entity{T}"/>
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
-        /// <param name="options">CosmosDb repository option</param>
+        /// <param name="options">CosmosDb repository option <see cref="CosmosDbRepositoryOptions{TEntity}"/></param>
         /// <returns>Create CosmosDbRepository repository instance for <see cref="Entity{T}"/></returns>
         public static ICosmosDbRepository<TEntity> Create<TEntity>(CosmosDbRepositoryOptions<TEntity> options)
             where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity

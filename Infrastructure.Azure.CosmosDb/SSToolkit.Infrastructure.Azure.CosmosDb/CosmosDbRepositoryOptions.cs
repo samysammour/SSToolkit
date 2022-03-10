@@ -55,6 +55,11 @@
         public Expression<Func<TEntity, object>> PartitionKeyExpression { get; set; }
 
         /// <summary>
+        /// Gets and sets indexing policy
+        /// </summary>
+        public IndexingPolicy IndexingPolicy { get; set; }
+
+        /// <summary>
         /// Gets and sets through put (default: 400)
         /// </summary>
         public int? ThroughPut { get; set; } = 400;

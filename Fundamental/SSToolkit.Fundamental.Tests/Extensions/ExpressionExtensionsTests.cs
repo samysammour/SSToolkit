@@ -9,6 +9,14 @@
     public class ExpressionExtensionsTests
     {
         [Fact]
+        public void GetPropertyName_Tests()
+        {
+            Expression<Func<ExpressionStub, int>> memberExpresssion = t => t.Id;
+
+            memberExpresssion.Body.GetPropertyName<int>().ShouldBe("Id");
+        }
+
+        [Fact]
         public void ToExpressionString_Tests()
         {
             // arrange
@@ -72,5 +80,10 @@
             Assert.False(result1);
             Assert.True(result2);
         }
+    }
+
+    public class ExpressionStub
+    {
+        public int Id { get; set; }
     }
 }

@@ -350,13 +350,19 @@
                 Database database = this.Options.Client
                     .CreateDatabaseIfNotExistsAsync(this.Options.Database.IsNullOrEmpty() ? "master" : this.Options.Database, throughput: this.Options.ThroughPut).Result;
                 this.containerName = this.Options.ContainerName.IsNullOrEmpty() ? typeof(TEntity).PrettyName() : this.Options.Database;
-                this.container = database
-                    .CreateContainerIfNotExistsAsync(
-                        new ContainerProperties(
-                            this.containerName,
-                            partitionKeyPath: $"/{this.Options.GetPartitionKey()}"),
-                            throughput: this.Options.ThroughPut).Result;
-                // TODO: add indexing and query request options
+
+                var containerProperties = new ContainerProperties(this.containerName, partitionKeyPath: $"/{this.Options.GetPartitionKey()}");
+                if (this.Options.IndexingPolicy != null)
+                {
+                    containerProperties.IndexingPolicy = this.Options.IndexingPolicy;
+                }
+
+                if (this.Options.IndexingPolicy.HasSpatialPath())
+                {
+                    containerProperties.GeospatialConfig = new GeospatialConfig(GeospatialType.Geometry);
+                }
+
+                this.container = database.CreateContainerIfNotExistsAsync(containerProperties, throughput: this.Options.ThroughPut).Result;
             }
             else
             {
@@ -383,28 +389,9 @@
                 return string.Empty;
             }
 
-            if (this.Options.PartitionKey.IsNullOrEmpty())
-            {
-                return this.GetFieldValue(entity, this.Options.PartitionKeyExpression);
-            }
-
-            var properties = entity.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                if (property.Name == this.Options.PartitionKey)
-                {
-                    return property.GetValue(entity)?.ToString() ?? string.Empty;
-                }
-            }
-
-            return string.Empty;
-        }
-
-        private string GetFieldValue(TEntity entity, Expression<Func<TEntity, object>> exp)
-        {
-            var fieldSelector = exp.Compile();
-            var field = fieldSelector(entity).ToString();
-            return field ?? string.Empty;
+            return this.Options.PartitionKey.IsNullOrEmpty()
+                ? entity.GetPropertyValue(this.Options.PartitionKeyExpression).ToString()
+                : entity.GetPropertyValue(this.Options.PartitionKey);
         }
 
         private bool IsValidContainerName(string name)

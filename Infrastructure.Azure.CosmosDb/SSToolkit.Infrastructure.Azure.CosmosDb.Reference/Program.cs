@@ -1,3 +1,4 @@
+using Microsoft.Azure.Cosmos;
 using SSToolkit.Infrastructure.Azure.CosmosDb;
 using SSToolkit.Infrastructure.Azure.CosmosDb.Reference;
 
@@ -10,9 +11,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddLogging();
 
-var connectionString = builder.Configuration.GetValue(typeof(string), "ConnectionString").ToString() ?? String.Empty;
+var connectionString = builder.Configuration.GetValue(typeof(string), "ConnectionString").ToString() ?? string.Empty;
+
+// https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy
+var customerIndexingPolicy = CosmosDbIndexingPolicyFactory.Create(automatic: true, indexingMode: Microsoft.Azure.Cosmos.IndexingMode.Consistent)
+                    .AddIncludedPath<Customer>("/*") // Index should always contain /* either in Include or exclude
+                    .AddExcludedPath<Customer>(x => x.Discriminator)
+                    .AddCompositePath<Customer>((x => x.Name, CompositePathSortOrder.Ascending), (x => x.Location, CompositePathSortOrder.Descending))
+                    .AddSpatialPath<Customer>("/Name/*");
+
 builder.Services.AddScoped<ICosmosDbRepository<Customer>>(serviceProvider =>
-        CosmosDbRepositoryFactory.Create<Customer>(connectionString: connectionString, x => x.Location, database: "database-name")
+        CosmosDbRepositoryFactory.Create<Customer>(connectionString: connectionString, x => x.Location, database: "Brain",
+        indexingPolicy: customerIndexingPolicy)
         .AddLoggingDecorator(serviceProvider.GetRequiredService<ILogger<ICosmosDbRepository<Customer>>>()));
 
 var app = builder.Build();
