@@ -2,8 +2,6 @@
 {
     using Microsoft.Azure.Cosmos;
     using Microsoft.Extensions.Logging;
-    using SSToolkit.Domain.Repositories;
-    using SSToolkit.Domain.Repositories.Decorators;
     using SSToolkit.Domain.Repositories.Model;
     using SSToolkit.Infrastructure.Azure.CosmosDb.Decorators;
     using System;

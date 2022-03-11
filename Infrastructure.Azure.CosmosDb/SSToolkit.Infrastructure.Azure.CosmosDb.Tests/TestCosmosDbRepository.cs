@@ -3,7 +3,6 @@
     using Microsoft.Azure.Cosmos;
     using NSubstitute;
     using SSToolkit.Domain.Repositories.Model;
-    using System.Collections.Generic;
     using System.Linq;
 
     public class TestCosmosDbRepository<TEntity> : CosmosDbRepository<TEntity>, ICosmosDbRepository<TEntity>

@@ -1,9 +1,7 @@
 namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
 {
-    using Microsoft.EntityFrameworkCore;
     using Shouldly;
     using SSToolkit.Domain.Repositories;
-    using SSToolkit.Domain.Repositories.Model;
     using SSToolkit.Domain.Repositories.Specifications;
     using System;
     using System.Collections.Generic;

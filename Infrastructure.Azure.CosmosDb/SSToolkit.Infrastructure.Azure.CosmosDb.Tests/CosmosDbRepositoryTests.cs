@@ -3,10 +3,8 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
     using System.Collections.Generic;
     using Xunit;
     using SSToolkit.Fundamental.Extensions;
-    using SSToolkit.Infrastructure.Azure.CosmosDb.Extensions;
     using System.Linq;
     using Shouldly;
-    using System.Linq.Expressions;
     using System;
     using Microsoft.Azure.Cosmos;
     using NSubstitute;
@@ -14,7 +12,6 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
     using SSToolkit.Domain.Repositories.Specifications;
     using System.Threading.Tasks;
     using SSToolkit.Domain.Repositories;
-    using Microsoft.Azure.Cosmos.Linq;
     using System.Net;
 
     public class CosmosDbRepositoryTests

@@ -3,7 +3,6 @@
     using Fundamental.Extensions;
     using Shouldly;
     using System.Collections.Generic;
-    using System.Linq;
     using Xunit;
 
     public partial class PositionOfTests

@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using SSToolkit.Fundamental.Extensions;
 
-    public static partial class ExtensionHelpers
+    public static partial class EntityFrameworkExtensions
     {
         /// <summary>
         /// Use Sql Server with Configuration <see cref="EntityFrameworkConfiguration"/> 

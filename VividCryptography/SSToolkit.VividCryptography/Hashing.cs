@@ -3,7 +3,6 @@
     using System;
     using System.IO;
     using System.Security.Cryptography;
-    using System.Text;
 
     /// <summary>
     /// Generate and compare hashing

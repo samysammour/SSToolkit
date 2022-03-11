@@ -2,7 +2,6 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
 {
     using System.Collections.Generic;
     using Xunit;
-    using SSToolkit.Fundamental.Extensions;
     using SSToolkit.Infrastructure.Azure.CosmosDb.Extensions;
     using System.Linq;
     using Shouldly;

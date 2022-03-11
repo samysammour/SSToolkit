@@ -1,6 +1,5 @@
 ﻿namespace SSToolkit.Domain.Repositories.Model
 {
-    using System;
     using System.Diagnostics;
     using Newtonsoft.Json;
     using SSToolkit.Fundamental;

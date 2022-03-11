@@ -1,8 +1,6 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
     using SSToolkit.Fundamental.Extensions;
     using Xunit;
 

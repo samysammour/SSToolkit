@@ -4,7 +4,6 @@
     using Microsoft.EntityFrameworkCore;
     using SSToolkit.Domain.Repositories;
     using SSToolkit.Domain.Repositories.Model;
-    using SSToolkit.Fundamental.Extensions;
 
     public static partial class EntityFrameworkExtensions
     {

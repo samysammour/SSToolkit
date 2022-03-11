@@ -1,7 +1,6 @@
 ﻿namespace SSToolkit.Domain.Repositories
 {
     using System.Collections.Generic;
-    using Repositories;
     using SSToolkit.Domain.Repositories.Model;
 
     /// <summary>

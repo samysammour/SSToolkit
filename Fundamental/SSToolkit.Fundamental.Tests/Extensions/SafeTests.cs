@@ -1,6 +1,5 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fundamental.Extensions;

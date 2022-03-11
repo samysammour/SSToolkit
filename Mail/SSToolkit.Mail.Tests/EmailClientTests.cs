@@ -1,11 +1,7 @@
 namespace SSToolkit.Mail.Tests
 {
-    using Shouldly;
     using System;
-    using System.Collections.Generic;
-    using System.IO;
     using System.Net.Mail;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class EmailClientTests

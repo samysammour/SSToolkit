@@ -2,7 +2,6 @@
 {
     using Fundamental.Extensions;
     using Shouldly;
-    using System.Collections.Generic;
     using Xunit;
 
     public partial class SubstringTillTests
