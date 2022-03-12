@@ -44,9 +44,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.Az
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.Azure.CosmosDb.Tests", "Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb.Tests\SSToolkit.Infrastructure.Azure.CosmosDb.Tests.csproj", "{C619A6CC-A9AF-4A0A-9F59-6FE45B851373}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Reference", "Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Reference\SSToolkit.Infrastructure.EntityFrameworkCore.Reference.csproj", "{F3207793-8BF7-4A5B-AEDC-26E8612F979C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Reference", "Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Reference\SSToolkit.Infrastructure.EntityFrameworkCore.Reference.csproj", "{F3207793-8BF7-4A5B-AEDC-26E8612F979C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.Azure.CosmosDb.Reference", "Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb.Reference\SSToolkit.Infrastructure.Azure.CosmosDb.Reference.csproj", "{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.Azure.CosmosDb.Reference", "Infrastructure.Azure.CosmosDb\SSToolkit.Infrastructure.Azure.CosmosDb.Reference\SSToolkit.Infrastructure.Azure.CosmosDb.Reference.csproj", "{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Infrastructure.Azure.Storage", "7. Infrastructure.Azure.Storage", "{FCD73546-4450-47C7-83F3-1039EF75AEE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.Azure.Storage", "Infrastructure.Azure.Storage\SSToolkit.Infrastructure.Azure.Storage\SSToolkit.Infrastructure.Azure.Storage.csproj", "{E1A9F061-7DDD-4080-91CD-0E57CC998B32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.Azure.Storage.Tests", "Infrastructure.Azure.Storage\SSToolkit.Infrastructure.Azure.Storage.Tests\SSToolkit.Infrastructure.Azure.Storage.Tests.csproj", "{7FB65961-7891-4555-BA6C-F2E0429C549C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.Azure.Storage.Reference", "Infrastructure.Azure.Storage\SSToolkit.Infrastructure.Azure.Storage.Reference\SSToolkit.Infrastructure.Azure.Storage.Reference.csproj", "{981B13C4-99D6-41E1-B304-C378693B08C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,6 +118,18 @@ Global
 		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A9F061-7DDD-4080-91CD-0E57CC998B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A9F061-7DDD-4080-91CD-0E57CC998B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A9F061-7DDD-4080-91CD-0E57CC998B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A9F061-7DDD-4080-91CD-0E57CC998B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB65961-7891-4555-BA6C-F2E0429C549C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB65961-7891-4555-BA6C-F2E0429C549C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB65961-7891-4555-BA6C-F2E0429C549C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB65961-7891-4555-BA6C-F2E0429C549C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{981B13C4-99D6-41E1-B304-C378693B08C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{981B13C4-99D6-41E1-B304-C378693B08C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{981B13C4-99D6-41E1-B304-C378693B08C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{981B13C4-99D6-41E1-B304-C378693B08C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +149,9 @@ Global
 		{C619A6CC-A9AF-4A0A-9F59-6FE45B851373} = {6CFEE93A-29E1-434D-87F0-6EA003ECF066}
 		{F3207793-8BF7-4A5B-AEDC-26E8612F979C} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
 		{9701EDF7-1217-40A6-AB74-A72CBCA5A3E0} = {6CFEE93A-29E1-434D-87F0-6EA003ECF066}
+		{E1A9F061-7DDD-4080-91CD-0E57CC998B32} = {FCD73546-4450-47C7-83F3-1039EF75AEE9}
+		{7FB65961-7891-4555-BA6C-F2E0429C549C} = {FCD73546-4450-47C7-83F3-1039EF75AEE9}
+		{981B13C4-99D6-41E1-B304-C378693B08C5} = {FCD73546-4450-47C7-83F3-1039EF75AEE9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C1F0F69-BA35-42EC-8E34-35C783804973}
