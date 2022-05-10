@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<SignAssembly>False</SignAssembly>
+		<LangVersion>10</LangVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Samy Sammour</Authors>
+		<Copyright>Samy Sammour</Copyright>
+		<Description>SSToolkit.Domain.Repositories for generic Repositories with Specification pattern. Suitable for DDD or other DIY principles</Description>
+		<PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/Domain.Repositories/SSToolkit.Domain.Repositories</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Domain.Repositories/SSToolkit.Domain.Repositories</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Specification;Specifications;Repository;Repositories;GenericRepository;FindOptions;DDD;DIY;</PackageTags>
+		<PackageReleaseNotes>Publishing</PackageReleaseNotes>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<AssemblyName>SSToolkit.Domain.Repositories</AssemblyName>
+		<RootNamespace>SSToolkit.Domain.Repositories</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\1. Fundamental\SSToolkit.Fundamental\SSToolkit.Fundamental.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+</Project>
