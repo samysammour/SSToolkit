@@ -1,4 +1,4 @@
-﻿namespace SSToolkit.Application.Commands.Core
+﻿namespace SSToolkit.Application.Commands.Core.Queries
 {
     public class QueryResponse<TResponse>
     {

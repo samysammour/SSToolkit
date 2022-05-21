@@ -1,4 +1,4 @@
-﻿namespace SSToolkit.Application.Commands.Core
+﻿namespace SSToolkit.Application.Commands.Core.Queries
 {
     using System;
 

@@ -39,8 +39,6 @@ namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
                 result.Count.ShouldBe(5);
                 result.FirstOrDefault().FirstName.ShouldBe("FirstName 6");
                 result.LastOrDefault().FirstName.ShouldBe("FirstName 10");
-
-                var x = context.Entities.Select(x => x);
             }
         }
     }

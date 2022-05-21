@@ -1,9 +1,9 @@
-﻿namespace SSToolkit.Application.Commands.Core
+﻿namespace SSToolkit.Application.Commands.Core.Commands
 {
     using MediatR;
     using System;
 
-    public abstract class CommandRequest : ICommandRequest, IBaseRequest
+    public abstract class CommandRequest : ICommandRequest<CommandResponse>, IBaseRequest
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandRequest"/> class.

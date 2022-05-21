@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure.Azure.Cosmos
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure.Azure.Storage", "Infrastructure.Azure.Storage", "{FCD73546-4450-47C7-83F3-1039EF75AEE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application.Commands", "Application.Commands", "{607B2ED1-BF06-4604-9B7C-0F96F5D2FC7B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application.Commands.Core", "Application.Commands.Core", "{607B2ED1-BF06-4604-9B7C-0F96F5D2FC7B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Utilities", "2. Utilities", "{408C9D29-4670-4599-AC72-654B7AF5BE6C}"
 EndProject
@@ -64,9 +64,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Tests", "4. Infrastructure\Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Tests\SSToolkit.Infrastructure.EntityFrameworkCore.Tests.csproj", "{1D8A6EC8-6A0A-4223-9D65-6D3758BDFAFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Application.Commands.Core", "5. Application\SSToolkit.Application.Commands.Core\SSToolkit.Application.Commands.Core.csproj", "{1D1F16E1-F2D0-4710-8160-5F9BFEB8758C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Reference", "4. Infrastructure\Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Reference\SSToolkit.Infrastructure.EntityFrameworkCore.Reference.csproj", "{638E6E87-09AB-49AB-877E-A5540A58C118}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSToolkit.Infrastructure.EntityFrameworkCore.Reference", "4. Infrastructure\Infrastructure.EntityFrameworkCore\SSToolkit.Infrastructure.EntityFrameworkCore.Reference\SSToolkit.Infrastructure.EntityFrameworkCore.Reference.csproj", "{638E6E87-09AB-49AB-877E-A5540A58C118}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Application.Commands.Core", "5. Application\SSToolkit.Application.Commands.Core\SSToolkit.Application.Commands.Core\SSToolkit.Application.Commands.Core.csproj", "{17E93FDB-9F12-466E-8816-7653543BB61F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Application.Commands.Core.Reference", "5. Application\SSToolkit.Application.Commands.Core\SSToolkit.Application.Commands.Core.Reference\SSToolkit.Application.Commands.Core.Reference.csproj", "{ADA622B4-D719-4756-ACC1-5B60A1EBEACA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSToolkit.Application.Commands.Core.Tests", "5. Application\SSToolkit.Application.Commands.Core\SSToolkit.Application.Commands.Core.Tests\SSToolkit.Application.Commands.Core.Tests.csproj", "{DD39B582-2B7D-40E9-A6D6-1BB03231EBD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,14 +142,22 @@ Global
 		{1D8A6EC8-6A0A-4223-9D65-6D3758BDFAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D8A6EC8-6A0A-4223-9D65-6D3758BDFAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D8A6EC8-6A0A-4223-9D65-6D3758BDFAFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D1F16E1-F2D0-4710-8160-5F9BFEB8758C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D1F16E1-F2D0-4710-8160-5F9BFEB8758C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D1F16E1-F2D0-4710-8160-5F9BFEB8758C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D1F16E1-F2D0-4710-8160-5F9BFEB8758C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{638E6E87-09AB-49AB-877E-A5540A58C118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{638E6E87-09AB-49AB-877E-A5540A58C118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{638E6E87-09AB-49AB-877E-A5540A58C118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{638E6E87-09AB-49AB-877E-A5540A58C118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E93FDB-9F12-466E-8816-7653543BB61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E93FDB-9F12-466E-8816-7653543BB61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E93FDB-9F12-466E-8816-7653543BB61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E93FDB-9F12-466E-8816-7653543BB61F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA622B4-D719-4756-ACC1-5B60A1EBEACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA622B4-D719-4756-ACC1-5B60A1EBEACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA622B4-D719-4756-ACC1-5B60A1EBEACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA622B4-D719-4756-ACC1-5B60A1EBEACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD39B582-2B7D-40E9-A6D6-1BB03231EBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD39B582-2B7D-40E9-A6D6-1BB03231EBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD39B582-2B7D-40E9-A6D6-1BB03231EBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD39B582-2B7D-40E9-A6D6-1BB03231EBD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,8 +186,10 @@ Global
 		{C7636C11-8AA5-46FA-B18D-1C35B1341870} = {FCD73546-4450-47C7-83F3-1039EF75AEE9}
 		{8CC3D621-147F-4204-AB8A-F41E88A7BB5E} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
 		{1D8A6EC8-6A0A-4223-9D65-6D3758BDFAFE} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
-		{1D1F16E1-F2D0-4710-8160-5F9BFEB8758C} = {607B2ED1-BF06-4604-9B7C-0F96F5D2FC7B}
 		{638E6E87-09AB-49AB-877E-A5540A58C118} = {99ECB76D-6111-4DF2-BFC6-398B78C49551}
+		{17E93FDB-9F12-466E-8816-7653543BB61F} = {607B2ED1-BF06-4604-9B7C-0F96F5D2FC7B}
+		{ADA622B4-D719-4756-ACC1-5B60A1EBEACA} = {607B2ED1-BF06-4604-9B7C-0F96F5D2FC7B}
+		{DD39B582-2B7D-40E9-A6D6-1BB03231EBD0} = {607B2ED1-BF06-4604-9B7C-0F96F5D2FC7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C1F0F69-BA35-42EC-8E34-35C783804973}

@@ -1,4 +1,4 @@
-﻿namespace SSToolkit.Application.Commands.Core
+﻿namespace SSToolkit.Application.Commands.Core.Queries
 {
     using System;
     using System.Threading;
@@ -7,7 +7,7 @@
     using Microsoft.Extensions.Logging;
 
     public abstract class QueryHandler<TRequest, TResponse> : IRequestHandler<TRequest, QueryResponse<TResponse>>
-        where TRequest : QueryRequest<TResponse>, IQueryRequest<TResponse>
+        where TRequest : QueryRequest<TResponse>, IQueryRequest<QueryResponse<TResponse>>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryHandler{TRequest, TResponse}"/> class.

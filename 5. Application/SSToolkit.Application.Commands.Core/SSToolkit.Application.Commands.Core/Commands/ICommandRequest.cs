@@ -1,4 +1,4 @@
-﻿namespace SSToolkit.Application.Commands.Core
+﻿namespace SSToolkit.Application.Commands.Core.Commands
 {
     using System;
     using MediatR;
