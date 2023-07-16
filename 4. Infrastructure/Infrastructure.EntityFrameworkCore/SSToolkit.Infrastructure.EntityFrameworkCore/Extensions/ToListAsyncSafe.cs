@@ -16,7 +16,7 @@
         /// <param name="source"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
         public static Task<List<TSource>> ToListAsyncSafe<TSource>(this IQueryable<TSource> source, CancellationToken cancellationToken = default)
         {
             if (source == null)

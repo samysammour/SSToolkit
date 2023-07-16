@@ -2,8 +2,8 @@
 {
     using System;
     using System.Linq.Expressions;
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class ExpressionExtensionsTests
@@ -82,7 +82,9 @@
         }
     }
 
+#pragma warning disable SA1402 // File may only contain a single type
     public class ExpressionStub
+#pragma warning restore SA1402 // File may only contain a single type
     {
         public int Id { get; set; }
     }

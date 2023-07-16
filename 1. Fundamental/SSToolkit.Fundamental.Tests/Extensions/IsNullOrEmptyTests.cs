@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class IsNullOrEmptyTests
@@ -16,11 +16,11 @@
                 .IsNullOrEmpty()
                 .ShouldBeTrue();
 
-            (new List<string?> { }.AsEnumerable())
+            new List<string?> { }.AsEnumerable()
                 .IsNullOrEmpty()
                 .ShouldBeTrue();
 
-            (new List<string> { "not empty" }.AsEnumerable())
+            new List<string> { "not empty" }.AsEnumerable()
                 .IsNullOrEmpty()
                 .ShouldBeFalse();
 

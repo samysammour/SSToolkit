@@ -28,7 +28,7 @@
                 return result.Replace($"{name}.", string.Empty).SliceFrom("=> ");
             }
 
-            return null;
+            return string.Empty;
         }
 
         public static string ToExpressionString<T>(this Expression<Func<T, object>> source)
@@ -41,7 +41,7 @@
                 return result.Replace($"{name}.", string.Empty).SliceFrom("=> ");
             }
 
-            return null;
+            return string.Empty;
         }
 
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)
@@ -50,7 +50,6 @@
 
             var leftVisitor = new ReplaceExpressionVisitor(expr1.Parameters[0], parameter);
             var left = leftVisitor.Visit(expr1.Body);
-
             var rightVisitor = new ReplaceExpressionVisitor(expr2.Parameters[0], parameter);
             var right = rightVisitor.Visit(expr2.Body);
 
@@ -92,7 +91,9 @@
             }
 
             public override Expression Visit(Expression node)
-                => node == this.oldValue ? this.newValue : base.Visit(node);
+                => node is not null && node == this.oldValue
+                    ? this.newValue
+                    : base.Visit(node) ?? Expression.Empty();
         }
     }
 }

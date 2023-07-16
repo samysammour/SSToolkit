@@ -1,28 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<SignAssembly>False</SignAssembly>
-		<LangVersion>10</LangVersion>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Authors>Samy Sammour</Authors>
-		<Copyright>Samy Sammour</Copyright>
-		<Description>SSToolkit.Mail for Mailing</Description>
-		<PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/Fundamental/SSToolkit.Fundamental</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Fundamental/SSToolkit.Fundamental</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>Mail;Email;SMTP;MailClient</PackageTags>
-		<PackageReleaseNotes>Publishing</PackageReleaseNotes>
-		<VersionPrefix>1.0.0</VersionPrefix>
-		<AssemblyName>SSToolkit.Mail</AssemblyName>
-		<RootNamespace>SSToolkit.Mail</RootNamespace>
-	</PropertyGroup>
+    <PropertyGroup>
+        <Description>SSToolkit.Mail for Mailing</Description>
+        <PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/Fundamental/SSToolkit.Fundamental</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Fundamental/SSToolkit.Fundamental</RepositoryUrl>
+        <PackageTags>Mail;Email;SMTP;MailClient</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <AssemblyName>SSToolkit.Mail</AssemblyName>
+        <RootNamespace>SSToolkit.Mail</RootNamespace>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Update="README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+
+
+    <ItemGroup>
+         <Compile Include="..\..\..\CentralGlobalSuppressions.cs" Link="CentralGlobalSuppressions.cs" />                    
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+    </ItemGroup>
 </Project>

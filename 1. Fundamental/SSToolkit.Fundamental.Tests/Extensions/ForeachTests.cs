@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class ForEachTests
@@ -18,7 +18,7 @@
                 "item2",
                 "item3"
             };
-            
+
             list.AsEnumerable().ForEach(item =>
             {
                 resultList.Add(item);

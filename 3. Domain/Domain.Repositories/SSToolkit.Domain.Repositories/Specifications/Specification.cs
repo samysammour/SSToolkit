@@ -6,11 +6,12 @@
 
     public class Specification<T> : ISpecification<T>
     {
-        public static readonly ISpecification<T> All = new Specification<T>();
+        private static readonly ISpecification<T> All = new Specification<T>();
         private readonly Expression<Func<T, bool>> expression;
 
         public Specification()
         {
+            this.expression = x => true;
         }
 
         public Specification(Expression<Func<T, bool>> expression)
@@ -20,7 +21,7 @@
 
         public virtual Expression<Func<T, bool>> ToExpression() => this.expression;
 
-        public Func<T, bool> ToPredicate() => this.ToExpression()?.Compile();
+        public Func<T, bool> ToPredicate() => this.ToExpression().Compile();
 
         public bool IsSatisfiedBy(T entity)
         {

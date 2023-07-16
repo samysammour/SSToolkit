@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using System.Collections.Generic;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class EqualsWildcardTests

@@ -44,11 +44,16 @@
         /// <param name="receiver">The receiver email.</param>
         /// <param name="subject">The email subject.</param>
         /// <param name="body">The email body.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         public async Task SendEmailAsync(string receiver, string subject, string body)
-            => await this.SendEmailAsync(this.Options.MailSender, new[] { receiver }, subject, body).ConfigureAwait(false);
+        {
+            if (this.Options.MailSender is not null)
+            {
+                await this.SendEmailAsync(this.Options.MailSender, new[] { receiver }, subject, body).ConfigureAwait(false);
+            }
+        }
 
         /// <summary>
         /// Send email to <paramref name="receiver"/>
@@ -57,9 +62,9 @@
         /// <param name="receiver">The receiver email.</param>
         /// <param name="subject">The email subject.</param>
         /// <param name="body">The email body.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         public async Task SendEmailAsync(string sender, string receiver, string subject, string body)
             => await this.SendEmailAsync(sender, new[] { receiver }, subject, body).ConfigureAwait(false);
 
@@ -73,11 +78,11 @@
         /// <param name="allowHtml">Email should include HTML (default: false)</param>
         /// <param name="cc">List of CC (default: null)</param>
         /// <param name="attachmets">List of attachments (default: null)</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         public async Task SendEmailAsync(string sender, string receiver, string subject, string body,
-            bool allowHtml = false, string[] cc = null, Attachment[] attachmets = null)
+            bool allowHtml = false, string[]? cc = null, Attachment[]? attachmets = null)
             => await this.SendEmailAsync(sender, new[] { receiver }, subject, body, allowHtml, cc, attachmets).ConfigureAwait(false);
 
         /// <summary>
@@ -90,10 +95,10 @@
         /// <param name="subject">The email subject.</param>
         /// <param name="body">The email body.</param>
         /// <param name="cc">List of CC (default: null)</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
-        public async Task SafeSendEmailAsync(string sender, string receiver, string subject, string body, string[] cc = null)
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
+        public async Task SafeSendEmailAsync(string sender, string receiver, string subject, string body, string[]? cc = null)
             => await this.SendEmailAsync(sender, new[] { receiver }, subject.StripHTML(), body.StripHTML(), false, cc, null).ConfigureAwait(false);
 
         /// <summary>
@@ -106,11 +111,11 @@
         /// <param name="allowHtml">Email should include HTML (default: false)</param>
         /// <param name="cc">List of CC (default: null)</param>
         /// <param name="attachmets">List of attachments (default: null)</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         public async Task SendEmailAsync(string sender, string[] receivers, string subject, string body,
-            bool allowHtml = false, string[] cc = null, Attachment[] attachmets = null)
+            bool allowHtml = false, string[]? cc = null, Attachment[]? attachmets = null)
         {
             var client = this.CreateSmtpClient();
 
@@ -142,8 +147,8 @@
                 message.To.Add(email);
             }
 
-            AddCCIfNotNull(cc, message);
-            AddAttachmentsIfNotNull(attachmets, message);
+            this.AddCCIfNotNull(message, cc);
+            AddAttachmentsIfNotNull(message, attachmets);
 
             try
             {
@@ -155,7 +160,18 @@
             }
         }
 
-        private void AddCCIfNotNull(string[] cc, MailMessage message)
+        private static void AddAttachmentsIfNotNull(MailMessage message, Attachment[]? attachmets)
+        {
+            if (attachmets != null)
+            {
+                foreach (var attachment in attachmets)
+                {
+                    message.Attachments.Add(attachment);
+                }
+            }
+        }
+
+        private void AddCCIfNotNull(MailMessage message, string[]? cc)
         {
             if (cc != null)
             {
@@ -167,17 +183,6 @@
                     }
 
                     message.CC.Add(email);
-                }
-            }
-        }
-
-        private static void AddAttachmentsIfNotNull(Attachment[] attachmets, MailMessage message)
-        {
-            if (attachmets != null)
-            {
-                foreach (var attachment in attachmets)
-                {
-                    message.Attachments.Add(attachment);
                 }
             }
         }
@@ -231,6 +236,7 @@
             {
                 return false;
             }
+
             try
             {
                 return new MailAddress(email).Address == trimmedEmail;

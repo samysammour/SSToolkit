@@ -1,18 +1,16 @@
 namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
 {
-    using Shouldly;
-    using SSToolkit.Domain.Repositories;
-    using SSToolkit.Domain.Repositories.Specifications;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Shouldly;
+    using SSToolkit.Domain.Repositories;
+    using SSToolkit.Domain.Repositories.Specifications;
     using Xunit;
 
     public class EntityFrameworkRepositoryTests
     {
-        private int counter = 0;
-
         [Fact]
         public async Task FindAll_Test()
         {

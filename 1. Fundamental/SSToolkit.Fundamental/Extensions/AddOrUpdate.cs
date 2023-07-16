@@ -20,11 +20,11 @@
             TValue value)
         {
             source ??= new Dictionary<TKey, TValue>();
-
-            if (key.Equals(default))
+            if (key?.Equals(default) == null)
             {
                 return source;
             }
+
 
             if (source.ContainsKey(key))
             {

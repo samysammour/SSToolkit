@@ -43,7 +43,7 @@
             return await this.decoretee.FindAllAsync(query, dbParameters, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<TEntity?> FindOneAsync(Guid id, CancellationToken cancellationToken)
         {
             this.Logger.LogInformation($"Get {typeof(TEntity)} by {id}.");
             return await this.decoretee.FindOneAsync(id, cancellationToken).AnyContext();

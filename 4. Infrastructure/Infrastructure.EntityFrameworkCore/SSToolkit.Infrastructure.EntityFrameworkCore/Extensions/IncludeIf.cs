@@ -4,7 +4,6 @@
     using Microsoft.EntityFrameworkCore;
     using SSToolkit.Domain.Repositories;
     using SSToolkit.Domain.Repositories.Model;
-    using SSToolkit.Fundamental.Extensions;
 
     public static partial class EntityFrameworkExtensions
     {
@@ -17,7 +16,7 @@
         /// <returns></returns>
         public static IQueryable<T> IncludeIf<T>(
             this IQueryable<T> source,
-            IFindOptions<T> options)
+            IFindOptions<T>? options)
             where T : class, IEntity
         {
             if (options == null || !options.ShouldInclude())
@@ -31,8 +30,7 @@
                 {
                     source = source.Include(include.Expression);
                 }
-
-                else if (!include.Path.IsNullOrEmpty())
+                else if (include.Path is not null)
                 {
                     source = source.Include(include.Path);
                 }

@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using SSToolkit.Fundamental;
     using Shouldly;
+    using SSToolkit.Fundamental;
     using Xunit;
 
     public class PrettyNameTests
@@ -31,6 +31,7 @@
         }
     }
 
+#pragma warning disable SA1402 // File may only contain a single type
     public class Stub
     {
     }
@@ -38,4 +39,5 @@
     public class GenericStub<T>
     {
     }
+#pragma warning restore SA1402 // File may only contain a single type
 }

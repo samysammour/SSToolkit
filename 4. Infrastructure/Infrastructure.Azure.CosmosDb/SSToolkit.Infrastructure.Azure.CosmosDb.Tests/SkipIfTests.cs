@@ -1,10 +1,10 @@
 namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
 {
     using System.Collections.Generic;
-    using Xunit;
-    using SSToolkit.Infrastructure.Azure.CosmosDb.Extensions;
     using System.Linq;
     using Shouldly;
+    using SSToolkit.Infrastructure.Azure.CosmosDb.Extensions;
+    using Xunit;
 
     public class SkipIfTests
     {

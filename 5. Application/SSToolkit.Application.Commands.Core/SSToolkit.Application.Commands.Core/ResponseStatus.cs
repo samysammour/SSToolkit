@@ -15,6 +15,6 @@
         /// <summary>
         /// Cancelled
         /// </summary>
-        Cancelled = 2 
+        Cancelled = 2
     }
 }

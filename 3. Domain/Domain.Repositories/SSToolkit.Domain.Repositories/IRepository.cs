@@ -19,7 +19,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default);
+        Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrives entities from the repository
@@ -28,7 +28,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="IEnumerable{T}"/> matching the specification</returns>
-        Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default);
+        Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrives entities from the repository
@@ -37,14 +37,14 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="IEnumerable{T}"/> matching the specification</returns>
-        Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default);
+        Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrives entity from the repository
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>The entity that has the id</returns>
-        Task<TEntity> FindOneAsync(object id, CancellationToken cancellationToken = default);
+        Task<TEntity?> FindOneAsync(object id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Check if entity exists
@@ -59,7 +59,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="object{T}"/></returns>
-        Task<TEntity> FindOneAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default);
+        Task<TEntity?> FindOneAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrives first entity from the repository
@@ -68,7 +68,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="object{T}"/> matching the specification</returns>
-        Task<TEntity> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default);
+        Task<TEntity?> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrives first entity from the repository
@@ -77,7 +77,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="object{T}"/> matching the specification</returns>
-        Task<TEntity> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default);
+        Task<TEntity?> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Inserts the provided entity.

@@ -1,10 +1,11 @@
+#pragma warning disable SA1200 // Using directives should be placed correctly
 using MediatR;
 using SSToolkit.Application.Commands.Core;
-using SSToolkit.Application.Commands.Core.Behaviors;
 using SSToolkit.Application.Commands.Core.Reference;
 using SSToolkit.Application.Commands.Core.Reference.Commands;
 using SSToolkit.Application.Commands.Core.Reference.CustomBehaviors;
 using SSToolkit.Application.Commands.Core.Reference.Queries;
+#pragma warning restore SA1200 // Using directives should be placed correctly
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +36,7 @@ app.UseHttpsRedirection();
 app.MapGet("/query", async (IMediator mediator) =>
 {
     var query = await mediator.Send(new GetUserByIdQuery(1), CancellationToken.None).ConfigureAwait(false);
-    return query.Result.User;
+    return query.Result?.User;
 })
 .WithName("query");
 

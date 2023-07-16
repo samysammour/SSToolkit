@@ -1,6 +1,6 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class SliceFromTests

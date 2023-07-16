@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Application.Commands.Core.Commands
 {
-    using MediatR;
     using System;
+    using MediatR;
 
     public abstract class CommandRequest : ICommandRequest<CommandResponse>, IBaseRequest
     {
@@ -25,7 +25,9 @@
         public DateTimeOffset Timestamp { get; private set; }
     }
 
+#pragma warning disable SA1402 // File may only contain a single type
     public abstract class CommandRequest<TResponse> : ICommandRequest<CommandResponse<TResponse>>, IBaseRequest
+#pragma warning restore SA1402 // File may only contain a single type
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandRequest{TResponse}"/> class.

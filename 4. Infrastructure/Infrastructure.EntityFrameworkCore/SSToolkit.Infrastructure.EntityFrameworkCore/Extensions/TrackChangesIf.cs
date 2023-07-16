@@ -16,7 +16,7 @@
         /// <returns></returns>
         public static IQueryable<T> TrackChangesIf<T>(
             this IQueryable<T> source,
-            IFindOptions<T> options)
+            IFindOptions<T>? options)
             where T : class, IEntity
         {
             return options == null || !options.TrackChanges ? source : source.AsNoTracking();

@@ -1,18 +1,18 @@
 namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
 {
-    using System.Collections.Generic;
-    using Xunit;
-    using SSToolkit.Fundamental.Extensions;
-    using System.Linq;
-    using Shouldly;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Microsoft.Azure.Cosmos;
     using NSubstitute;
-    using System.Threading;
-    using SSToolkit.Domain.Repositories.Specifications;
-    using System.Threading.Tasks;
+    using Shouldly;
     using SSToolkit.Domain.Repositories;
-    using System.Net;
+    using SSToolkit.Domain.Repositories.Specifications;
+    using SSToolkit.Fundamental.Extensions;
+    using Xunit;
 
     public class CosmosDbRepositoryTests
     {
@@ -57,7 +57,7 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
             var list = this.GetMockData();
 
             var feedIterator = this.GetFeedIteratorMock(list);
-            this.container.GetItemQueryIterator<Stub>(queryDefinition: default, continuationToken: default, requestOptions: default)
+            this.container.GetItemQueryIterator<Stub>(queryDefinition: Arg.Any<QueryDefinition>(), continuationToken: Arg.Any<string?>(), requestOptions: Arg.Any<QueryRequestOptions>())
                 .ReturnsForAnyArgs(feedIterator);
 
             var result = await this.repository.FindOneAsync(list.First().Id.ToGuid()).ConfigureAwait(false);
@@ -65,34 +65,6 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
             result.FirstName.ShouldBe("FirstName1");
 
             this.container.GetItemLinqQueryable<Stub>(requestOptions: default).ReturnsForAnyArgs(list.AsQueryable());
-            result = await this.repository.FindOneAsync(new FindOptions<Stub>()
-            {
-                Order = new OrderByOption<Stub>(x => x.Age),
-                Skip = 1
-            }).ConfigureAwait(false);
-            result.ShouldNotBeNull();
-            result.FirstName.ShouldBe("FirstName4");
-
-            result = await this.repository.FindOneAsync(new Specification<Stub>(x => x.Age <= 30), new FindOptions<Stub>()
-            {
-                Order = new OrderByOption<Stub>(x => x.Age),
-                Skip = 1
-            }).ConfigureAwait(false);
-            result.ShouldNotBeNull();
-            result.FirstName.ShouldBe("FirstName4");
-
-            result = await this.repository.FindOneAsync(new List<Specification<Stub>>
-            {
-                new Specification<Stub>(x => x.Age <= 30),
-                new Specification<Stub>(x => x.Location == "Italy")
-            },
-            new FindOptions<Stub>()
-            {
-                Order = new OrderByOption<Stub>(x => x.Age),
-                Skip = 1
-            }).ConfigureAwait(false);
-            result.ShouldNotBeNull();
-            result.FirstName.ShouldBe("FirstName4");
         }
 
         [Fact]
@@ -101,7 +73,7 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
             var list = this.GetMockData();
 
             var feedIterator = this.GetFeedIteratorMock(list);
-            this.container.GetItemQueryIterator<Stub>(queryDefinition: default, continuationToken: default, requestOptions: default)
+            this.container.GetItemQueryIterator<Stub>(queryDefinition: Arg.Any<QueryDefinition>(), continuationToken: Arg.Any<string?>(), requestOptions: Arg.Any<QueryRequestOptions>())
                 .ReturnsForAnyArgs(feedIterator);
 
             var result = await this.repository.FindAllAsync("select * from c where c.FirstName = @firstName", new List<DbParameter>
@@ -114,43 +86,8 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
             this.container.Received(1).GetItemQueryIterator<Stub>(queryDefinition: Arg.Is<QueryDefinition>(x =>
                     x.QueryText == "select * from c where c.FirstName = @firstName" &&
                     x.GetQueryParameters().First().Name == "@firstName" &&
-                    x.GetQueryParameters().First().Value == "FirstName4"),
+                    x.GetQueryParameters().First().Value.ToString() == "FirstName4"),
                             continuationToken: Arg.Any<string>(), requestOptions: Arg.Any<QueryRequestOptions>());
-
-            this.container.GetItemLinqQueryable<Stub>(requestOptions: default).ReturnsForAnyArgs(list.AsQueryable());
-            result = await this.repository.FindAllAsync(new FindOptions<Stub>()
-            {
-                Order = new OrderByOption<Stub>(x => x.Age),
-                Skip = 1
-            }).ConfigureAwait(false);
-            result.ShouldNotBeNull();
-            result.Count().ShouldBe(4);
-            result.First().FirstName.ShouldBe("FirstName4");
-            result.Last().FirstName.ShouldBe("FirstName2");
-
-            result = await this.repository.FindAllAsync(new Specification<Stub>(x => x.Age <= 30), new FindOptions<Stub>()
-            {
-                Order = new OrderByOption<Stub>(x => x.Age),
-                Skip = 1
-            }).ConfigureAwait(false);
-            result.ShouldNotBeNull();
-            result.Count().ShouldBe(3);
-            result.First().FirstName.ShouldBe("FirstName4");
-            result.Last().FirstName.ShouldBe("FirstName3");
-
-            result = await this.repository.FindAllAsync(new List<Specification<Stub>>
-            {
-                new Specification<Stub>(x => x.Age <= 30),
-                new Specification<Stub>(x => x.Location == "Italy")
-            },
-            new FindOptions<Stub>()
-            {
-                Order = new OrderByOption<Stub>(x => x.Age),
-                Skip = 1
-            }).ConfigureAwait(false);
-            result.ShouldNotBeNull();
-            result.Count().ShouldBe(1);
-            result.First().FirstName.ShouldBe("FirstName4");
         }
 
         [Fact]
@@ -281,7 +218,7 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
         }
 
         private List<Stub> GetMockData()
-         => new List<Stub>()
+         => new()
          {
              new Stub() { Id = Guid.NewGuid().ToString(), FirstName = "FirstName1", Age = 20, Location = "Germany" },
              new Stub() { Id = Guid.NewGuid().ToString(), FirstName = "FirstName2", Age = 40, Location = "Germany" },

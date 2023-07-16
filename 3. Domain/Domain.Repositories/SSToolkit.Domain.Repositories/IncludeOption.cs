@@ -18,9 +18,9 @@
             this.Path = path;
         }
 
-        public Expression<Func<TEntity, object>> Expression { get; }
+        public Expression<Func<TEntity, object>>? Expression { get; }
 
-        public string Path { get; }
+        public string? Path { get; }
 
         public override string ToString()
         {

@@ -8,7 +8,7 @@
         /// <summary>
         /// Take if the value > 0
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="maxItemCount">The take</param>
         /// <returns></returns>
@@ -19,7 +19,7 @@
         /// <summary>
         /// Take if the value > 0
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="maxItemCount">The take</param>
         /// <returns></returns>
@@ -30,7 +30,7 @@
         /// <summary>
         /// Take if the value is not null
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="maxItemCount">Nullable take</param>
         /// <returns></returns>
@@ -41,7 +41,7 @@
         /// <summary>
         /// Take if the value is not null
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <param name="maxItemCount">Nullable take</param>
         /// <returns></returns>

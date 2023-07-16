@@ -7,7 +7,7 @@
 
     public class Timer : IDisposable
     {
-        public readonly Stopwatch watch = new Stopwatch();
+        private readonly Stopwatch watch = new();
 
         public Timer()
         {

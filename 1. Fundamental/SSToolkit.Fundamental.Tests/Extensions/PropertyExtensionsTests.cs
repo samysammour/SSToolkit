@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class PropertyExtensionsTests
@@ -30,7 +30,7 @@
 
         public class Stub
         {
-            public string FirstName { get; set; }
+            public string FirstName { get; set; } = string.Empty;
 
             public bool IsUnique { get; set; }
         }

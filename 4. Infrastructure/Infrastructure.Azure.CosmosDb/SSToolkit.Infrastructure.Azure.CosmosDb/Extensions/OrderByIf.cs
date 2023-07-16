@@ -17,7 +17,7 @@
         /// <returns></returns>
         public static IQueryable<T> OrderByIf<T, TKey>(
             this IQueryable<T> source,
-            Expression<Func<T, TKey>> expression, bool descending = false)
+            Expression<Func<T, TKey>>? expression, bool descending = false)
         {
             if (expression != null)
             {

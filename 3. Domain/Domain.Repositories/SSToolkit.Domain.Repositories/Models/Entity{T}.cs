@@ -17,7 +17,9 @@
         /// The identifier.
         /// </value>
         [JsonProperty(PropertyName = "id")]
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public T Id { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         /// <summary>
         /// Gets or sets the entity identifier.
@@ -28,7 +30,9 @@
         [JsonProperty(PropertyName = "IId")]
         object IEntity.Id
         {
+#pragma warning disable CS8603 // Possible null reference return.
             get => this.Id;
+#pragma warning restore CS8603 // Possible null reference return.
             set => this.Id = (T)value;
         }
 
@@ -53,7 +57,7 @@
                 return false;
             }
 
-            return a.Id.Equals(b.Id);
+            return a.Id?.Equals(b.Id) ?? false;
         }
 
         /// <summary>
@@ -73,7 +77,7 @@
         /// <returns>
         ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var other = obj as Entity<T>;
             if (ReferenceEquals(other, null))
@@ -91,7 +95,7 @@
                 return false;
             }
 
-            return this.Id.Equals(other.Id);
+            return this.Id?.Equals(other.Id) ?? false;
         }
 
         /// <summary>
@@ -100,7 +104,7 @@
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public override int GetHashCode() => this.GetType().GetHashCode() ^ this.Id.GetHashCode();
+        public override int GetHashCode() => this.GetType().GetHashCode() ^ this.Id?.GetHashCode() ?? 0;
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

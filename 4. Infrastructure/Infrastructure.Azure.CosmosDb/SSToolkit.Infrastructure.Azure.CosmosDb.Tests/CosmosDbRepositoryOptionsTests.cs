@@ -1,7 +1,7 @@
 namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
 {
-    using Xunit;
     using Shouldly;
+    using Xunit;
 
     public class CosmosDbRepositoryOptionsTests
     {

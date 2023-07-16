@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public partial class ToBoolTests
@@ -9,16 +9,16 @@
         [Fact]
         public void ToBool_Test()
         {
-            ((string)null).ToBool().ShouldBeFalse();
-            ((string)null).ToBool(@default: true).ShouldBeTrue();
+            (null as string).ToBool().ShouldBeFalse();
+            (null as string).ToBool(@default: true).ShouldBeTrue();
 
-            ((string)null).ToNullableBool(@default: null).ShouldBeNull();
+            (null as string).ToNullableBool(@default: null).ShouldBeNull();
 
             string.Empty.ToBool().ShouldBeFalse();
             string.Empty.ToBool(@default: true).ShouldBeTrue();
 
             "true".ToBool().ShouldBeTrue();
-            "true".ToBool(@default:true).ShouldBeTrue();
+            "true".ToBool(@default: true).ShouldBeTrue();
             "true".ToBool(@default: false).ShouldBeTrue();
 
             "false".ToBool().ShouldBeFalse();

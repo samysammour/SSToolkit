@@ -1,11 +1,11 @@
 namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
 {
-    using Xunit;
-    using Shouldly;
-    using SSToolkit.Fundamental.Extensions;
-    using NSubstitute;
     using System;
     using System.Threading.Tasks;
+    using NSubstitute;
+    using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
+    using Xunit;
 
     public class ResiliencyTransactionTests
     {
@@ -27,7 +27,11 @@ namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
                     return await func().AnyContext();
                 });
 
-                await transaction.ExecuteAsync(async () => Assert.True(true)).AnyContext();
+                await transaction.ExecuteAsync(async () =>
+                {
+                    await Task.Delay(1);
+                    Assert.True(true);
+                }).AnyContext();
 
                 (await transaction.ExecuteResultAsync(async () => await Task.FromResult("Result").AnyContext()).AnyContext())
                     .ShouldNotBeNull().ShouldBe("Result");

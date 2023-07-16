@@ -1,4 +1,6 @@
+#pragma warning disable SA1200 // Using directives should be placed correctly
 using SSToolkit.Infrastructure.Azure.Storage;
+#pragma warning restore SA1200 // Using directives should be placed correctly
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -38,7 +40,7 @@ app.MapGet("/blobs/download/stream", async (IAzureBlobStorage azureBlobStorage) 
 
 app.MapGet("/blobs/download/bytes", async (IAzureBlobStorage azureBlobStorage) =>
 {
-    return await azureBlobStorage.DownloadAsync($"file.txt"); 
+    return await azureBlobStorage.DownloadAsync($"file.txt");
 });
 
 app.MapGet("/blobs/exists", async (IAzureBlobStorage azureBlobStorage) =>
@@ -66,13 +68,13 @@ app.MapGet("/blobs/delete", async (IAzureBlobStorage azureBlobStorage) =>
 app.MapGet("/containers/create", async (IAzureBlobStorage azureBlobStorage) =>
 {
     // the name provided in options ("my-container") will be internally provided
-    return await azureBlobStorage.GetOrCreateContainerAsync(null);
+    return await azureBlobStorage.GetOrCreateContainerAsync("my-container");
 });
 
 app.MapGet("/containers/delete", async (IAzureBlobStorage azureBlobStorage) =>
 {
     // the name provided in options ("my-container") will be internally provided
-    return await azureBlobStorage.DeleteContainerAsync(null);
+    return await azureBlobStorage.DeleteContainerAsync("my-container");
 });
 
 app.Run();

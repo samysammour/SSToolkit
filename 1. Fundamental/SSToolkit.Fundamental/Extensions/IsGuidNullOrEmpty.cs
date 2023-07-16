@@ -11,7 +11,7 @@
         /// <returns>true when Guid null or empty</returns>
         public static bool IsGuidNullOrEmpty(this Guid source)
         {
-            return source == null || source == Guid.Empty;
+            return source == Guid.Empty;
         }
 
         /// <summary>

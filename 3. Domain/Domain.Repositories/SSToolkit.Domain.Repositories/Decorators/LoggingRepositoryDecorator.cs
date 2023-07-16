@@ -5,8 +5,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
-    using Model;
-    using Specifications;
+    using SSToolkit.Domain.Repositories.Model;
+    using SSToolkit.Domain.Repositories.Specifications;
     using SSToolkit.Fundamental.Extensions;
 
     public class LoggingRepositoryDecorator<TEntity> : IRepository<TEntity>
@@ -46,16 +46,16 @@
             return result;
         }
 
-        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             this.LogSpecificationTakeSkipWhenNotNull($"Get all {typeof(TEntity)}.", null, options);
             this.LogOrders(options);
             this.LogIncludes(options);
-            
+
             return await this.decoretee.FindAllAsync(options, cancellationToken).AnyContext();
         }
 
-        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             this.LogSpecificationTakeSkipWhenNotNull($"Get all {typeof(TEntity)}.", specification.AsList(), options);
             this.LogOrders(options);
@@ -64,7 +64,7 @@
             return await this.decoretee.FindAllAsync(specification, options, cancellationToken).AnyContext();
         }
 
-        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             this.LogSpecificationTakeSkipWhenNotNull($"Get all {typeof(TEntity)}.", specifications, options);
             this.LogOrders(options);
@@ -73,13 +73,13 @@
             return await this.decoretee.FindAllAsync(specifications, options, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(object id, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(object id, CancellationToken cancellationToken = default)
         {
             this.Logger.LogInformation($"Get {typeof(TEntity)} by {id}.");
             return await this.decoretee.FindOneAsync(id, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             this.LogSpecificationTakeSkipWhenNotNull($"Get first {typeof(TEntity)}.", null, options);
             this.LogOrders(options);
@@ -88,7 +88,7 @@
             return await this.decoretee.FindOneAsync(options, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             this.LogSpecificationTakeSkipWhenNotNull($"Get first {typeof(TEntity)}.", specification.AsList(), options);
             this.LogOrders(options);
@@ -97,7 +97,7 @@
             return await this.decoretee.FindOneAsync(specification, options, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             this.LogSpecificationTakeSkipWhenNotNull($"Get first {typeof(TEntity)}.", specifications, options);
             this.LogOrders(options);
@@ -157,12 +157,15 @@
             return result;
         }
 
-        private void LogSpecificationTakeSkipWhenNotNull(string message, IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options)
+        private void LogSpecificationTakeSkipWhenNotNull(string message, IEnumerable<ISpecification<TEntity>>? specifications, IFindOptions<TEntity>? options)
         {
             var loggingMessage = new StringBuilder(message);
-            foreach (var specification in specifications.Safe())
+            if (specifications != null)
             {
-                loggingMessage.Append($" Specification: {specification}.");
+                foreach (var specification in specifications.Safe())
+                {
+                    loggingMessage.Append($" Specification: {specification}.");
+                }
             }
 
             if (options != null)
@@ -181,7 +184,7 @@
             this.Logger.LogInformation(loggingMessage.ToString().Trim());
         }
 
-        private void LogOrders(IFindOptions<TEntity> options)
+        private void LogOrders(IFindOptions<TEntity>? options)
         {
             if (options != null && options.HasOrders())
             {
@@ -195,7 +198,7 @@
             }
         }
 
-        private void LogIncludes(IFindOptions<TEntity> options)
+        private void LogIncludes(IFindOptions<TEntity>? options)
         {
             if (options != null && options.ShouldInclude())
             {

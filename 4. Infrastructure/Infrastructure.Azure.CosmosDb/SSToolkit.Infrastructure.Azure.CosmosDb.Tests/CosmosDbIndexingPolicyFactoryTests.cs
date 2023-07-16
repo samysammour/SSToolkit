@@ -1,9 +1,9 @@
 namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
 {
-    using Xunit;
     using System.Linq;
-    using Shouldly;
     using Microsoft.Azure.Cosmos;
+    using Shouldly;
+    using Xunit;
 
     public class CosmosDbIndexingPolicyFactoryTests
     {
@@ -116,10 +116,12 @@ namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
         }
     }
 
+#pragma warning disable SA1402 // File may only contain a single type
     public class IndexingPolicyStub : CosmosDbEntity
+#pragma warning restore SA1402 // File may only contain a single type
     {
-        public string FirstIndex { get; set; }
+        public string FirstIndex { get; set; } = string.Empty;
 
-        public string SecondIndex { get; set; }
+        public string SecondIndex { get; set; } = string.Empty;
     }
 }

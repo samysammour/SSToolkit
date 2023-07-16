@@ -7,7 +7,7 @@
 
     public static partial class ExtensionHelpers
     {
-        private static JsonSerializerSettings CamelCasedJsonSettings => new JsonSerializerSettings
+        private static JsonSerializerSettings CamelCasedJsonSettings => new()
         {
             // PreserveReferencesHandling = PreserveReferencesHandling.None,
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,

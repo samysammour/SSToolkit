@@ -8,9 +8,8 @@
         /// Register resiliency transaction
         /// </summary>
         /// <param name="source"></param>
-        /// <param name="context">Db context</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
         public static IServiceCollection RegisterResiliencyTransaction<T>(
             this IServiceCollection source)
             where T : BaseDbContext

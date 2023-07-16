@@ -49,7 +49,7 @@
         /// <summary>
         /// Gets or sets the result
         /// </summary>
-        public TResponse Result { get; set; }
+        public TResponse? Result { get; set; }
 
         /// <summary>
         /// Returns <c>true</c> when Status is Cancelled
@@ -64,6 +64,6 @@
         /// <summary>
         /// Gets cancellation reason
         /// </summary>
-        public string CancellationReason { get; } = null;
+        public string? CancellationReason { get; } = null;
     }
 }

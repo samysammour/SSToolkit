@@ -1,8 +1,8 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
-    using Shouldly;
     using System;
+    using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class IsGuidNullOrEmptyTests
@@ -11,8 +11,8 @@
         public void IsGuidNullOrEmpty_Test()
         {
             ((Guid?)null).IsGuidNullOrEmpty().ShouldBeTrue();
-            (Guid.Empty).IsGuidNullOrEmpty().ShouldBeTrue();
-            (Guid.NewGuid()).IsGuidNullOrEmpty().ShouldBeFalse();
+            Guid.Empty.IsGuidNullOrEmpty().ShouldBeTrue();
+            Guid.NewGuid().IsGuidNullOrEmpty().ShouldBeFalse();
         }
     }
 }

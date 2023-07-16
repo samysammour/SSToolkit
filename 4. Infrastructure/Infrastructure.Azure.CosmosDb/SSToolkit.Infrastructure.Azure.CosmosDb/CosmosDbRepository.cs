@@ -19,13 +19,15 @@
         where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
     {
         private Container container;
-        private string containerName;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        // Container will be initialized in InitializeMethod
         public CosmosDbRepository(CosmosDbRepositoryOptions<TEntity> options)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             this.Options = options;
-            this.Initialize();
             this.CosmosDbLinqQuery = new CosmosDbLinqQuery();
+            this.Initialize();
         }
 
         // For testing purposes
@@ -33,17 +35,17 @@
 
         protected CosmosDbRepositoryOptions<TEntity> Options { get; }
 
-        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             return await this.FindAllAsync(Enumerable.Empty<ISpecification<TEntity>>(), options, cancellationToken: cancellationToken).AnyContext();
         }
 
-        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             return await this.FindAllAsync(new[] { specification }, options, cancellationToken: cancellationToken).AnyContext();
         }
 
-        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             var specificationsArray = specifications as ISpecification<TEntity>[] ?? specifications.ToArray();
             var expressions = specificationsArray.Safe().Select(s => s.ToExpression());
@@ -53,9 +55,12 @@
             double requestCharge = 0;
             var result = new List<TEntity>();
             var query = this.container.GetItemLinqQueryable<TEntity>(requestOptions: requestOptions)
-                .WhereIf(expressions)
-                .OrderByIf(order?.Expression, order?.Direction == OrderByDirection.Desc)
-                .SkipIf(options?.Skip)
+                .WhereIf(expressions);
+            var query1 = query
+                .OrderByIf(order?.Expression, order?.Direction == OrderByDirection.Desc);
+            var query2 = query1
+                .SkipIf(options?.Skip);
+            var query3 = query2
                 .TakeIf(options?.Take);
 
             var iterator = this.CosmosDbLinqQuery.GetFeedIterator(query);
@@ -76,7 +81,7 @@
         {
             double requestCharge = 0;
             var result = new List<TEntity>();
-            string unescapedContinuationToken = null;
+            string? continuationToken = null;
 
             var queryDefinition = new QueryDefinition(query);
             foreach (var dbParameter in dbParameters)
@@ -85,11 +90,11 @@
             }
 
             var requestOptions = this.GetRequestOptions();
-            var iterator = this.container.GetItemQueryIterator<TEntity>(queryDefinition, unescapedContinuationToken, requestOptions: requestOptions);
+            var iterator = this.container.GetItemQueryIterator<TEntity>(queryDefinition: queryDefinition, continuationToken: continuationToken, requestOptions: requestOptions);
             while (iterator.HasMoreResults)
             {
                 FeedResponse<TEntity> response = await iterator.ReadNextAsync(cancellationToken: cancellationToken).AnyContext();
-                unescapedContinuationToken = response.ContinuationToken;
+                continuationToken = response.ContinuationToken;
 
                 requestCharge += response.RequestCharge;
                 foreach (var entity in response.Resource)
@@ -101,7 +106,7 @@
             return result.ToList();
         }
 
-        public async Task<TEntity> FindOneAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<TEntity?> FindOneAsync(Guid id, CancellationToken cancellationToken)
         {
             if (id.IsDefault())
             {
@@ -133,7 +138,8 @@
                 return false;
             }
 
-            return await this.FindOneAsync(id, cancellationToken: cancellationToken).AnyContext() != null;
+            var item = await this.FindOneAsync(id, cancellationToken: cancellationToken).AnyContext();
+            return item is not null;
         }
 
         public async Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken)
@@ -150,18 +156,13 @@
 
         public async Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            if (entity == null)
-            {
-                return (default, RepositoryActionResult.None);
-            }
-
             var isNew = entity.Id.IsDefault() || !await this.ExistsAsync(entity.Id.ToGuid(), cancellationToken: cancellationToken).AnyContext();
             if (isNew)
             {
                 entity.Id = Guid.NewGuid().ToString();
-                if (entity is IStateEntity stateEntity && stateEntity.State.CreatedDate == null)
+                if (entity is IStateEntity stateEntity && stateEntity.State?.CreatedDate == null)
                 {
-                    stateEntity.State.SetCreated();
+                    stateEntity.State?.SetCreated();
                 }
             }
 
@@ -181,7 +182,7 @@
             }
 
             var entity = await this.FindOneAsync(id, cancellationToken: cancellationToken).AnyContext();
-            if (entity != null)
+            if (entity is not null)
             {
                 try
                 {
@@ -209,13 +210,13 @@
 
         public async Task<RepositoryActionResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            if (entity?.Id.IsDefault() == true)
+            if (entity.Id.IsDefault() == true)
             {
                 return RepositoryActionResult.None;
             }
 
             var oldEntity = await this.FindOneAsync(entity.Id.ToGuid(), cancellationToken: cancellationToken).AnyContext();
-            if (oldEntity == null)
+            if (oldEntity is null)
             {
                 return RepositoryActionResult.None;
             }
@@ -264,7 +265,7 @@
             return response;
         }
 
-        public async Task<TEntity> FindOneAsync(object id, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(object id, CancellationToken cancellationToken = default)
         {
             if (!id.IsValidGuid())
             {
@@ -294,17 +295,17 @@
             return await this.DeleteAsync(id.ToString().ToGuid(), cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
-            return await this.FindOneAsync(specification: null, options, cancellationToken).AnyContext();
+            return await this.FindOneAsync(specification: new Specification<TEntity>(), options, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             return await this.FindOneAsync(specification.AsList(), options, cancellationToken).AnyContext();
         }
 
-        public async Task<TEntity> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             var specificationsArray = specifications != null
                             ? specifications is ISpecification<TEntity>[]? specifications as ISpecification<TEntity>[]
@@ -341,22 +342,22 @@
         {
             if (this.Options.Container == null)
             {
-                if (!this.Options.ContainerName.IsNullOrEmpty() && !this.IsValidContainerName(this.Options.ContainerName))
+                if (this.Options.ContainerName is not null && !this.IsValidContainerName(this.Options.ContainerName))
                 {
                     throw new ArgumentException($"Container name is not valid {this.Options.ContainerName}");
                 }
 
-                Database database = this.Options.Client
+                Database database = this.Options.Client?
                     .CreateDatabaseIfNotExistsAsync(this.Options.Database.IsNullOrEmpty() ? "master" : this.Options.Database, throughput: this.Options.ThroughPut).Result;
-                this.containerName = this.Options.ContainerName.IsNullOrEmpty() ? typeof(TEntity).PrettyName() : this.Options.Database;
+                var containerName = this.Options.ContainerName.IsNullOrEmpty() ? typeof(TEntity).PrettyName() : this.Options.Database;
 
-                var containerProperties = new ContainerProperties(this.containerName, partitionKeyPath: $"/{this.Options.GetPartitionKey()}");
+                var containerProperties = new ContainerProperties(containerName, partitionKeyPath: $"/{this.Options.GetPartitionKey()}");
                 if (this.Options.IndexingPolicy != null)
                 {
                     containerProperties.IndexingPolicy = this.Options.IndexingPolicy;
                 }
 
-                if (this.Options.IndexingPolicy.HasSpatialPath())
+                if (this.Options.IndexingPolicy != null && this.Options.IndexingPolicy.HasSpatialPath())
                 {
                     containerProperties.GeospatialConfig = new GeospatialConfig(GeospatialType.Geometry);
                 }
@@ -379,18 +380,18 @@
         }
 
         private PartitionKey GetPartitionKey(TEntity entity)
-            => new PartitionKey(GetPartitionKeyValue(entity));
+            => new(this.GetPartitionKeyValue(entity));
 
         private string GetPartitionKeyValue(TEntity entity)
         {
-            if (entity == null)
+            if (entity is null)
             {
                 return string.Empty;
             }
 
             return this.Options.PartitionKey.IsNullOrEmpty()
-                ? entity.GetPropertyValue(this.Options.PartitionKeyExpression).ToString()
-                : entity.GetPropertyValue(this.Options.PartitionKey);
+                ? entity.GetPropertyValue(this.Options.PartitionKeyExpression)?.ToString() ?? string.Empty
+                : entity.GetPropertyValue(this.Options.PartitionKey) ?? string.Empty;
         }
 
         private bool IsValidContainerName(string name)

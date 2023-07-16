@@ -1,8 +1,8 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
-    using Shouldly;
     using System.Linq;
+    using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class AsTests

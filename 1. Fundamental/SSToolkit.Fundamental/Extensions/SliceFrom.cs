@@ -15,12 +15,12 @@
         [DebuggerStepThrough]
         public static string SliceFrom(this string source, string from, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
         {
-            if(source.IsNullOrEmpty())
+            if (source.IsNullOrEmpty())
             {
                 return source;
             }
 
-            if(from.IsNullOrEmpty())
+            if (from.IsNullOrEmpty())
             {
                 return source;
             }
@@ -38,12 +38,12 @@
         [DebuggerStepThrough]
         public static string SliceFromLast(this string source, string from, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
         {
-            if(source.IsNullOrEmpty())
+            if (source.IsNullOrEmpty())
             {
                 return source;
             }
 
-            if(from.IsNullOrEmpty())
+            if (from.IsNullOrEmpty())
             {
                 return source;
             }
@@ -53,27 +53,27 @@
 
         private static string SliceFromInternal(this string source, string from, int fromIndex)
         {
-            if(source.IsNullOrEmpty())
+            if (source.IsNullOrEmpty())
             {
                 return source;
             }
 
-            if(from.IsNullOrEmpty())
+            if (from.IsNullOrEmpty())
             {
                 return source;
             }
 
-            if(fromIndex == 0 && fromIndex + from.Length < source.Length)
+            if (fromIndex == 0 && fromIndex + from.Length < source.Length)
             {
                 return source.Substring(fromIndex + from.Length);
             }
 
-            if(fromIndex > 0 && fromIndex == source.Length)
+            if (fromIndex > 0 && fromIndex == source.Length)
             {
                 return string.Empty;
             }
 
-            if(fromIndex > 0 && fromIndex + from.Length < source.Length)
+            if (fromIndex > 0 && fromIndex + from.Length < source.Length)
             {
                 return source.Substring(fromIndex + from.Length);
             }

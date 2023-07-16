@@ -13,9 +13,9 @@
         /// <param name="receiver">The receiver email.</param>
         /// <param name="subject">The email subject.</param>
         /// <param name="body">The email body.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         Task SendEmailAsync(string receiver, string subject, string body);
 
         /// <summary>
@@ -25,9 +25,9 @@
         /// <param name="receiver">The receiver email.</param>
         /// <param name="subject">The email subject.</param>
         /// <param name="body">The email body.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         Task SendEmailAsync(string sender, string receiver, string subject, string body);
 
         /// <summary>
@@ -40,11 +40,11 @@
         /// <param name="allowHtml">Email should include HTML (default: false)</param>
         /// <param name="cc">List of CC (default: null)</param>
         /// <param name="attachmets">List of attachments (default: null)</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         Task SendEmailAsync(string sender, string receiver, string subject, string body,
-            bool allowHtml = false, string[] cc = null, Attachment[] attachmets = null);
+            bool allowHtml = false, string[]? cc = null, Attachment[]? attachmets = null);
 
         /// <summary>
         /// Send email to <paramref name="receiver"/>
@@ -56,10 +56,10 @@
         /// <param name="subject">The email subject.</param>
         /// <param name="body">The email body.</param>
         /// <param name="cc">List of CC (default: null)</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
-        Task SafeSendEmailAsync(string sender, string receiver, string subject, string body, string[] cc = null);
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
+        Task SafeSendEmailAsync(string sender, string receiver, string subject, string body, string[]? cc = null);
 
         /// <summary>
         /// Send email to list of <paramref name="receivers"/>
@@ -71,10 +71,10 @@
         /// <param name="allowHtml">Email should include HTML (default: false)</param>
         /// <param name="cc">List of CC (default: null)</param>
         /// <param name="attachmets">List of attachments (default: null)</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        /// <exception cref="ArgumentException">ArgumentException</exception>
+        /// <exception cref="Exception">Exception</exception>
         Task SendEmailAsync(string sender, string[] receivers, string subject, string body,
-            bool allowHtml = false, string[] cc = null, Attachment[] attachmets = null);
+            bool allowHtml = false, string[]? cc = null, Attachment[]? attachmets = null);
     }
 }

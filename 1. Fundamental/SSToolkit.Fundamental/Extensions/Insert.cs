@@ -14,7 +14,7 @@
         /// <returns></returns>
         public static List<TSource> Insert<TSource>(this List<TSource> source, TSource item, int index = 0)
         {
-            if(item == null)
+            if (item == null)
             {
                 return source;
             }

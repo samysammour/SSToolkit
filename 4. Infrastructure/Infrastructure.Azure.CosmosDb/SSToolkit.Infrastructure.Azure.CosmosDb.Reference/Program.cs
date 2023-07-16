@@ -1,6 +1,8 @@
+#pragma warning disable SA1200 // Using directives should be placed correctly
 using Microsoft.Azure.Cosmos;
 using SSToolkit.Infrastructure.Azure.CosmosDb;
 using SSToolkit.Infrastructure.Azure.CosmosDb.Reference;
+#pragma warning restore SA1200 // Using directives should be placed correctly
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,7 @@ var customerIndexingPolicy = CosmosDbIndexingPolicyFactory.Create(automatic: tru
                     .AddSpatialPath<Customer>("/Name/*");
 
 builder.Services.AddScoped<ICosmosDbRepository<Customer>>(serviceProvider =>
-        CosmosDbRepositoryFactory.Create<Customer>(connectionString: connectionString, x => x.Location, database: "Brain",
+        CosmosDbRepositoryFactory.Create<Customer>(connectionString: connectionString, partitionKey: x => x.Location, database: "Brain",
         indexingPolicy: customerIndexingPolicy)
         .AddLoggingDecorator(serviceProvider.GetRequiredService<ILogger<ICosmosDbRepository<Customer>>>()));
 

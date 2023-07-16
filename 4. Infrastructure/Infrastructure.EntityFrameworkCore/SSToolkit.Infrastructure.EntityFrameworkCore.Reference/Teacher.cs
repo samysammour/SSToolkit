@@ -4,6 +4,6 @@
 
     public class Teacher : Entity<int>
     {
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
     using System.Collections.Generic;
-    using Fundamental.Extensions;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class AddOrUpdateTests

@@ -1,29 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<SignAssembly>False</SignAssembly>
-		<LangVersion>10</LangVersion>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Authors>Samy Sammour</Authors>
-		<Copyright>Samy Sammour</Copyright>
-		<Description>VividCryptography for secure AES encryption and Rfc2898 hashing</Description>
-		<PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/VividCryptography/SSToolkit.VividCryptography</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/VividCryptography/SSToolkit.VividCryptography</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
+        <Description>VividCryptography for secure AES encryption and Rfc2898 hashing</Description>
+        <PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/VividCryptography/SSToolkit.VividCryptography</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/VividCryptography/SSToolkit.VividCryptography</RepositoryUrl>
 		<PackageTags>Hashing;Encryption;Decryption;Security</PackageTags>
-		<PackageReleaseNotes>Publishing</PackageReleaseNotes>
-		<VersionPrefix>1.1.0</VersionPrefix>
-		<AssemblyName>SSToolkit.VividCryptography</AssemblyName>
-		<RootNamespace>SSToolkit.VividCryptography</RootNamespace>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <AssemblyName>SSToolkit.VividCryptography</AssemblyName>
+        <RootNamespace>SSToolkit.VividCryptography</RootNamespace>
 	</PropertyGroup>
+
+    <ItemGroup>
+             <Compile Include="..\..\..\CentralGlobalSuppressions.cs" Link="CentralGlobalSuppressions.cs" />                    
+    </ItemGroup>
 
 	<ItemGroup>
 		<None Update="README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
 	</ItemGroup>
 
 </Project>

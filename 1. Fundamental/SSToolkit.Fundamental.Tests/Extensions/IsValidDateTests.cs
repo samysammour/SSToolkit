@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class IsValidDateTests
@@ -17,7 +17,7 @@
             "2015-05-29T05:50:06".IsValidDate().ShouldBeTrue();
             "29.05.2015 05:50:06".IsValidDate().ShouldBeTrue();
 
-            "not valid date".IsValidDate().ShouldBeFalse ();
+            "not valid date".IsValidDate().ShouldBeFalse();
         }
     }
 }

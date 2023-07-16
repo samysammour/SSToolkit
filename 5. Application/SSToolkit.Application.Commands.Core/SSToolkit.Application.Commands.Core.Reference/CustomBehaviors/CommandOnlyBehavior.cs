@@ -1,11 +1,10 @@
-﻿
-namespace SSToolkit.Application.Commands.Core.Reference.CustomBehaviors
+﻿namespace SSToolkit.Application.Commands.Core.Reference.CustomBehaviors
 {
+    using System.Threading;
+    using System.Threading.Tasks;
     using MediatR;
     using SSToolkit.Application.Commands.Core.Behaviors;
     using SSToolkit.Application.Commands.Core.Commands;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     public class CommandOnlyBehavior<TRequest, TResponse> : BaseBehavior<TRequest, TResponse>
         where TRequest : class, ICommandRequest<TResponse>

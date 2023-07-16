@@ -1,17 +1,21 @@
 ﻿namespace SSToolkit.Infrastructure.Azure.CosmosDb.Tests
 {
+    using System.Linq;
     using Microsoft.Azure.Cosmos;
     using NSubstitute;
     using SSToolkit.Domain.Repositories.Model;
-    using System.Linq;
 
     public class TestCosmosDbRepository<TEntity> : CosmosDbRepository<TEntity>, ICosmosDbRepository<TEntity>
         where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
     {
         private ICosmosDbLinqQuery cosmosDbLinqQuery;
+
         public TestCosmosDbRepository(CosmosDbRepositoryOptions<TEntity> options)
             : base(options)
         {
+            this.cosmosDbLinqQuery = Substitute.For<ICosmosDbLinqQuery>();
+            //this.cosmosDbLinqQuery.GetFeedIterator<TEntity>(Arg.Any<IQueryable<TEntity>>())
+            //    .Returns();
         }
 
         protected override ICosmosDbLinqQuery CosmosDbLinqQuery
@@ -21,10 +25,9 @@
             {
                 var linqQuery = Substitute.For<ICosmosDbLinqQuery>();
                 linqQuery.GetFeedIterator(Arg.Any<IQueryable<Stub>>())
-                    .Returns(x => this.GetFeedIteratorMock((IQueryable<Stub>)x[0]));
+                    .Returns(x => this.GetFeedIteratorMock((IQueryable<Stub>)x));
                 this.cosmosDbLinqQuery = linqQuery;
             }
-
         }
 
         private FeedIterator<Stub> GetFeedIteratorMock(IQueryable<Stub> list)

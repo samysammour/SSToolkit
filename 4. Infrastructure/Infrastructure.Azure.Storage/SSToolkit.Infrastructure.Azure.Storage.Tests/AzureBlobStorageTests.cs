@@ -19,7 +19,8 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
 
         public AzureBlobStorageTests()
         {
-            this.Initialize();
+            this.container = Substitute.For<BlobContainerClient>();
+            this.azureBlobStorage = new AzureBlobStorage(this.container);
         }
 
         [Fact]
@@ -27,7 +28,7 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
         {
             var blobName = "BlobName";
             var blob = this.CreateMockBlobClient();
-            container.GetBlobClient(blobName).Returns(blob);
+            this.container.GetBlobClient(blobName).Returns(blob);
 
             var result = await this.azureBlobStorage.UploadAsync(blobName, new byte[] { 1 }, "container", true).AnyContext();
             result.ShouldBeTrue();
@@ -61,7 +62,7 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
                 overwrite: Arg.Is<bool>(x => x == false),
                 cancellationToken: Arg.Any<CancellationToken>()).AnyContext();
 
-            container.Received(4).GetBlobClient(blobName);
+            this.container.Received(4).GetBlobClient(blobName);
         }
 
         [Fact]
@@ -69,7 +70,7 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
         {
             var blobName = "BlobName";
             var blob = this.CreateMockBlobClient();
-            container.GetBlobClient(blobName).Returns(blob);
+            this.container.GetBlobClient(blobName).Returns(blob);
 
             var result = await this.azureBlobStorage.DownloadAsync(blobName, "container").AnyContext();
             result.ShouldNotBeNull();
@@ -80,7 +81,7 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
             await this.azureBlobStorage.DownloadAsync(blobName, new MemoryStream(), "container").AnyContext();
             await blob.Received(2).DownloadToAsync(destination: Arg.Any<Stream>(), cancellationToken: Arg.Any<CancellationToken>()).AnyContext();
 
-            container.Received(2).GetBlobClient(blobName);
+            this.container.Received(2).GetBlobClient(blobName);
         }
 
         [Fact]
@@ -88,12 +89,12 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
         {
             var blobName = "BlobName";
             var blob = this.CreateMockBlobClient();
-            container.GetBlobClient(blobName).Returns(blob);
+            this.container.GetBlobClient(blobName).Returns(blob);
 
             await this.azureBlobStorage.ExistsAsync(blobName, "container").AnyContext();
 
             await blob.Received(1).ExistsAsync(cancellationToken: Arg.Any<CancellationToken>()).AnyContext();
-            container.Received(1).GetBlobClient(blobName);
+            this.container.Received(1).GetBlobClient(blobName);
         }
 
         [Fact]
@@ -101,7 +102,7 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
         {
             var blobName = "BlobName";
             var blob = this.CreateMockBlobClient();
-            container.GetBlobClient(blobName).Returns(blob);
+            this.container.GetBlobClient(blobName).Returns(blob);
 
             await this.azureBlobStorage.DeleteAsync(blobName, "container", DeleteSnapshotsOption.IncludeSnapshots).AnyContext();
 
@@ -126,8 +127,8 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
             await blob.Received(2).DeleteAsync(
                 Arg.Is<DeleteSnapshotsOption>(x => x == DeleteSnapshotsOption.IncludeSnapshots),
                 cancellationToken: Arg.Any<CancellationToken>()).AnyContext();
-            
-            container.Received(4).GetBlobClient(blobName);
+
+            this.container.Received(4).GetBlobClient(blobName);
         }
 
         [Fact]
@@ -139,11 +140,11 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
             var uri = new Uri($"https://someurl.com/{sourceBlobName}");
             // for source a real instance is needed for the uri
             var sourceBlob = Substitute.ForPartsOf<BlobClient>(uri, new BlobClientOptions());
-           sourceBlob.ExistsAsync(Arg.Any<CancellationToken>()).Returns(x => this.CreateResponseMock(true));
+            sourceBlob.ExistsAsync(Arg.Any<CancellationToken>()).Returns(x => this.CreateResponseMock(true));
 
             var targetBlob = this.CreateMockBlobClient();
-            container.GetBlobClient(sourceBlobName).Returns(sourceBlob);
-            container.GetBlobClient(targetBlobName).Returns(targetBlob);
+            this.container.GetBlobClient(sourceBlobName).Returns(sourceBlob);
+            this.container.GetBlobClient(targetBlobName).Returns(targetBlob);
 
             await this.azureBlobStorage.CopyAsync(sourceBlobName, targetBlobName, "container").AnyContext();
 
@@ -165,10 +166,10 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
 
             // for source a real instance is needed for the uri
             var targetBlob = this.CreateMockBlobClient();
-            container.GetBlobClient(sourceBlobName).Returns(
+            this.container.GetBlobClient(sourceBlobName).Returns(
                 x => sourceBlobInstance,
                 always => sourceBlobMock);
-            container.GetBlobClient(targetBlobName).Returns(targetBlob);
+            this.container.GetBlobClient(targetBlobName).Returns(targetBlob);
 
             sourceBlobInstance.ExistsAsync(Arg.Any<CancellationToken>()).Returns(x => this.CreateResponseMock(true));
 
@@ -182,8 +183,8 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
                 Arg.Is<DeleteSnapshotsOption>(x => x == DeleteSnapshotsOption.IncludeSnapshots),
                 cancellationToken: Arg.Any<CancellationToken>()).AnyContext();
 
-            container.Received(2).GetBlobClient(sourceBlobName);
-            container.Received(1).GetBlobClient(targetBlobName);
+            this.container.Received(2).GetBlobClient(sourceBlobName);
+            this.container.Received(1).GetBlobClient(targetBlobName);
         }
 
         [Fact]
@@ -192,16 +193,16 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
             var container = await this.azureBlobStorage.GetOrCreateContainerAsync("container").AnyContext();
             container.ShouldNotBeNull().ShouldBe(this.container);
 
-            await container.Received(1).CreateIfNotExistsAsync(Arg.Any<PublicAccessType>(), 
+            await container.Received(1).CreateIfNotExistsAsync(Arg.Any<PublicAccessType>(),
                 cancellationToken: Arg.Any<CancellationToken>()).AnyContext();
         }
 
         [Fact]
         public async Task DeleteContainerAsync_Test()
         {
-            container.ExistsAsync(Arg.Any<CancellationToken>())
+            this.container.ExistsAsync(Arg.Any<CancellationToken>())
                 .Returns(x => this.CreateResponseMock(false), always => this.CreateResponseMock(true));
-            
+
             var result = await this.azureBlobStorage.DeleteContainerAsync("container").AnyContext();
             result.ShouldBeFalse();
 
@@ -220,12 +221,6 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
             var response = Substitute.For<Response<bool>>();
             response.Value.Returns(val);
             return response;
-        }
-
-        private void Initialize()
-        {
-            this.container = Substitute.For<BlobContainerClient>();
-            this.azureBlobStorage = new AzureBlobStorage(this.container);
         }
     }
 }

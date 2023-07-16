@@ -3,7 +3,7 @@
     public class CommandResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResponse{TResponse}"/> class.
+        /// Initializes a new instance of the <see cref="CommandResponse"/> class.
         /// <br>Use when Completed</br>
         /// </summary>
         public CommandResponse()
@@ -12,7 +12,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResponse{TResponse}"/> class.
+        /// Initializes a new instance of the <see cref="CommandResponse"/> class.
         /// <br>Use when Cancelled</br>
         /// </summary>
         /// <param name="cancellationReason">The cancellation reason</param>
@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResponse{TResponse}"/> class.
+        /// Initializes a new instance of the <see cref="CommandResponse"/> class.
         /// <br>Use when custom status <see cref="ResponseStatus"/></br>
         /// </summary>
         /// <param name="status">The stats</param>
@@ -47,13 +47,15 @@
         /// <summary>
         /// Gets cancellation reason
         /// </summary>
-        public string CancellationReason { get; } = null;
+        public string? CancellationReason { get; } = null;
     }
 
+#pragma warning disable SA1402 // File may only contain a single type
     public class CommandResponse<TResponse> : CommandResponse
+#pragma warning restore SA1402 // File may only contain a single type
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResponse{TResponse}"/> class.
+        /// Initializes a new instance of the <see cref="CommandResponse{TResponse}"/> class.
         /// <br>Use when Completed</br>
         /// </summary>
         /// <param name="result"></param>
@@ -64,7 +66,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResponse{TResponse}"/> class.
+        /// Initializes a new instance of the <see cref="CommandResponse{TResponse}"/> class.
         /// <br>Use when Cancelled</br>
         /// </summary>
         /// <param name="cancellationReason">The cancellation reason</param>
@@ -74,7 +76,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResponse{TResponse}"/> class.
+        /// Initializes a new instance of the <see cref="CommandResponse{TResponse}"/> class.
         /// <br>Use when custom status <see cref="ResponseStatus"/></br>
         /// </summary>
         /// <param name="status">The stats</param>
@@ -87,6 +89,6 @@
         /// <summary>
         /// Gets or sets the result
         /// </summary>
-        public TResponse Result { get; set; }
+        public TResponse? Result { get; set; }
     }
 }

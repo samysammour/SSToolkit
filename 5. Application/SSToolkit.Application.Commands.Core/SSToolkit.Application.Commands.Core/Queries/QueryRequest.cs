@@ -8,8 +8,8 @@
         /// Initializes a new instance of the <see cref="QueryRequest{TResponse}"/> class.
         /// </summary>
         protected QueryRequest()
-            : this (Guid.NewGuid())
         {
+            this.RequestId = Guid.NewGuid();
         }
 
         /// <summary>
@@ -24,6 +24,6 @@
         /// <summary>
         /// Gets or sets a unique request Id
         /// </summary>
-        public Guid RequestId { get; private set; }
+        public Guid RequestId { get; set; }
     }
 }

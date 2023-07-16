@@ -2,10 +2,6 @@
 {
     public class EntityFrameworkConfiguration
     {
-        public EntityFrameworkConfiguration()
-        {
-        }
-
         public EntityFrameworkConfiguration(string connectionString)
         {
             this.ConnectionString = connectionString;

@@ -4,12 +4,12 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
     using SSToolkit.Domain.Repositories;
     using SSToolkit.Domain.Repositories.Model;
     using SSToolkit.Domain.Repositories.Specifications;
-    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
     using SSToolkit.Fundamental.Extensions;
-    using Microsoft.EntityFrameworkCore;
+    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
 
     public class EntityFrameworkRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
@@ -27,7 +27,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="IEnumerable{T}"/></returns>
-        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             if (options?.HasOrders() == true)
             {
@@ -55,14 +55,14 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="IEnumerable{T}"/> matching the specification</returns>
-        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             if (options?.HasOrders() == true)
             {
                 return await this.dbContext.Set<TEntity>()
                     .TrackChangesIf(options)
                     .IncludeIf(options)
-                    .WhereIf(specification?.ToExpression())
+                    .WhereIf(specification.ToExpression())
                     .SkipIf(options?.Skip)
                     .TakeIf(options?.Take)
                     .OrderByIf(options).ToListAsyncSafe(cancellationToken).AnyContext();
@@ -72,7 +72,7 @@
                 return await this.dbContext.Set<TEntity>()
                     .TrackChangesIf(options)
                     .IncludeIf(options)
-                    .WhereIf(specification?.ToExpression())
+                    .WhereIf(specification.ToExpression())
                     .SkipIf(options?.Skip)
                     .TakeIf(options?.Take).ToListAsyncSafe(cancellationToken).AnyContext();
             }
@@ -85,7 +85,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="IEnumerable{T}"/> matching the specification</returns>
-        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             var expressions = specifications.Safe().Select(s => s.ToExpression());
 
@@ -115,7 +115,7 @@
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>The entity that has the id</returns>
-        public async Task<TEntity> FindOneAsync(object id, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(object id, CancellationToken cancellationToken = default)
         {
             if (id.IsDefault())
             {
@@ -146,7 +146,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="object{T}"/></returns>
-        public async Task<TEntity> FindOneAsync(IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             return await this.dbContext.Set<TEntity>()
                 .TrackChangesIf(options)
@@ -163,12 +163,12 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="object{T}"/> matching the specification</returns>
-        public async Task<TEntity> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(ISpecification<TEntity> specification, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             return await this.dbContext.Set<TEntity>()
                 .TrackChangesIf(options)
                 .IncludeIf(options)
-                .WhereIf(specification?.ToExpression())
+                .WhereIf(specification.ToExpression())
                 .SkipIf(options?.Skip)
                 .TakeIf(options?.Take)
                 .OrderByIf(options).FirstOrDefaultAsync(cancellationToken).AnyContext();
@@ -181,7 +181,7 @@
         /// <param name="options">Query specific options</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns><see cref="object{T}"/> matching the specification</returns>
-        public async Task<TEntity> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity> options = null, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FindOneAsync(IEnumerable<ISpecification<TEntity>> specifications, IFindOptions<TEntity>? options = null, CancellationToken cancellationToken = default)
         {
             var expressions = specifications.Safe().Select(s => s.ToExpression());
 
@@ -223,11 +223,6 @@
         /// <returns></returns>
         public async Task<(TEntity entity, RepositoryActionResult action)> UpsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            if (entity == null)
-            {
-                return (default, RepositoryActionResult.None);
-            }
-
             bool isNew = entity.Id.IsDefault() || !await this.ExistsAsync(entity.Id, cancellationToken).AnyContext();
             if (isNew)
             {
@@ -237,7 +232,7 @@
             await this.dbContext.SaveChangesAsync<TEntity>(cancellationToken).AnyContext();
 
 #pragma warning disable SA1008 // Opening parenthesis must be spaced correctly
-            return isNew ?(entity, RepositoryActionResult.Inserted) : (entity, RepositoryActionResult.Updated);
+            return isNew ? (entity, RepositoryActionResult.Inserted) : (entity, RepositoryActionResult.Updated);
 #pragma warning restore SA1008 // Opening parenthesis must be spaced correctly
         }
 
@@ -296,7 +291,7 @@
         public async Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
         {
             return await this.dbContext.Set<TEntity>()
-                        .WhereIf(specification?.ToExpression())
+                        .WhereIf(specification.ToExpression())
                         .CountAsync(cancellationToken).AnyContext();
         }
 
@@ -319,35 +314,40 @@
             {
                 if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(Guid) && value?.GetType() == typeof(string))
                 {
-                    value = Guid.Parse(value.ToString());
+                    return value?.ToString() ?? string.Empty;
+                }
+
+                if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(Guid) && value?.GetType() == typeof(Guid))
+                {
+                    return Guid.Parse(value?.ToString() ?? string.Empty);
                 }
 
                 if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(int) && value?.GetType() == typeof(int))
                 {
-                    value = int.Parse(value.ToString());
+                    return int.Parse(value?.ToString() ?? string.Empty);
                 }
 
                 if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(float) && value?.GetType() == typeof(float))
                 {
-                    value = float.Parse(value.ToString());
+                    return float.Parse(value?.ToString() ?? string.Empty);
                 }
 
                 if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(double) && value?.GetType() == typeof(double))
                 {
-                    value = double.Parse(value.ToString());
+                    return double.Parse(value?.ToString() ?? string.Empty);
                 }
 
                 if (typeof(TEntity).GetProperty("Id")?.PropertyType == typeof(string) && value?.GetType() == typeof(string))
                 {
-                    value = value.ToString();
+                    return value?.ToString() ?? string.Empty;
                 }
+
+                return value ?? string.Empty;
             }
             catch (FormatException ex)
             {
                 throw new FormatException(ex.Message, ex);
             }
-
-            return value;
         }
     }
 }

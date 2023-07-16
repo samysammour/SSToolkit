@@ -1,14 +1,15 @@
 namespace SSToolkit.Domain.Repositories.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.Extensions.Logging;
     using NSubstitute;
     using SSToolkit.Domain.Repositories.Decorators;
     using SSToolkit.Domain.Repositories.Model;
     using SSToolkit.Domain.Repositories.Specifications;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Xunit;
+
     public class LoggingRepositoryDecoratorTests
     {
         private readonly LoggingRepositoryDecorator<StubEntity> decorated;
@@ -88,7 +89,7 @@ namespace SSToolkit.Domain.Repositories.Tests
             // Arrange
             var options = new FindOptions<StubEntity>()
             {
-                Take = 10, 
+                Take = 10,
                 Skip = 1
             };
 
@@ -281,7 +282,7 @@ namespace SSToolkit.Domain.Repositories.Tests
             var stub = new StubEntity { Id = Guid.NewGuid() };
 
             // Act
-            this.decoratee.UpsertAsync(Arg.Any<StubEntity>()).Returns((stub, RepositoryActionResult.Inserted ));
+            this.decoratee.UpsertAsync(Arg.Any<StubEntity>()).Returns((stub, RepositoryActionResult.Inserted));
             var result = this.decorated.UpsertAsync(stub).Result;
 
             // Assert
@@ -341,9 +342,9 @@ namespace SSToolkit.Domain.Repositories.Tests
 
         public class StubEntity : Entity
         {
-            public string FirstName { get; set; }
+            public string FirstName { get; set; } = string.Empty;
 
-            public string LastName { get; set; }
+            public string LastName { get; set; } = string.Empty;
 
             public long Age { get; set; }
         }

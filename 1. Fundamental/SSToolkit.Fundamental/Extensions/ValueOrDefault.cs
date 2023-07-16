@@ -26,5 +26,27 @@
 
             return @default;
         }
+
+        /// <summary>
+        /// Get value or default of dictionary
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static T ValueOrDefault<T>(this Dictionary<string, T> source, string key)
+        {
+            if (source.IsNullOrEmpty() || key.IsNullOrEmpty())
+            {
+                return default;
+            }
+
+            if (source.TryGetValue(key, out T result))
+            {
+                return result;
+            }
+
+            return default;
+        }
     }
 }

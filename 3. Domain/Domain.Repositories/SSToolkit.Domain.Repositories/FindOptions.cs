@@ -26,7 +26,7 @@
         /// <param name="take">The take amount.</param>
         /// <param name="order">The order option</param>
         /// <param name="orders">The order options</param>
-        public FindOptions(int? skip = null, int? take = null, OrderByOption<T> order = null, IEnumerable<OrderByOption<T>> orders = null)
+        public FindOptions(int? skip = null, int? take = null, OrderByOption<T>? order = null, IEnumerable<OrderByOption<T>>? orders = null)
         {
             this.Take = take;
             this.Skip = skip;
@@ -41,7 +41,7 @@
         /// <param name="take">The take amount.</param>
         /// <param name="include">The include option</param>
         /// <param name="includes">The include options</param>
-        public FindOptions(int? skip = null, int? take = null, IncludeOption<T> include = null, IEnumerable<IncludeOption<T>> includes = null)
+        public FindOptions(int? skip = null, int? take = null, IncludeOption<T>? include = null, IEnumerable<IncludeOption<T>>? includes = null)
         {
             this.Take = take;
             this.Skip = skip;
@@ -58,7 +58,7 @@
         /// <param name="orders">The order options</param>
         /// <param name="include">The include option</param>
         /// <param name="includes">The include options</param>
-        public FindOptions(int? skip = null, int? take = null, OrderByOption<T> order = null, IEnumerable<OrderByOption<T>> orders = null, IncludeOption<T> include = null, IEnumerable<IncludeOption<T>> includes = null)
+        public FindOptions(int? skip = null, int? take = null, OrderByOption<T>? order = null, IEnumerable<OrderByOption<T>>? orders = null, IncludeOption<T>? include = null, IEnumerable<IncludeOption<T>>? includes = null)
         {
             this.Take = take;
             this.Skip = skip;
@@ -72,13 +72,13 @@
 
         public int? Take { get; set; }
 
-        public OrderByOption<T> Order { get; set; }
+        public OrderByOption<T>? Order { get; set; }
 
-        public IEnumerable<OrderByOption<T>> Orders { get; set; }
+        public IEnumerable<OrderByOption<T>>? Orders { get; set; }
 
-        public IncludeOption<T> Include { get; set; }
+        public IncludeOption<T>? Include { get; set; }
 
-        public IEnumerable<IncludeOption<T>> Includes { get; set; }
+        public IEnumerable<IncludeOption<T>>? Includes { get; set; }
 
         public bool TrackChanges { get; set; }
 
@@ -92,7 +92,7 @@
                 }.SafeConcat(this.Includes);
             }
 
-            return this.Includes.SafeAny() ? this.Includes : new List<IncludeOption<T>>();
+            return this.Includes is not null ? this.Includes : new List<IncludeOption<T>>();
         }
 
         public IEnumerable<OrderByOption<T>> GetOrders()
@@ -105,7 +105,7 @@
                 }.SafeConcat(this.Orders);
             }
 
-            return this.Orders.SafeAny() ? this.Orders : new List<OrderByOption<T>>();
+            return this.Orders is not null ? this.Orders : new List<OrderByOption<T>>();
         }
 
         public bool HasOrders() => this.Order != null || this.Orders.SafeAny();

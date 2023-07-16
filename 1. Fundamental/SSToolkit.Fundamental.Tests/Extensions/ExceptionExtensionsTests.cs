@@ -1,8 +1,8 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
     using System;
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class ExceptionExtensionsTests

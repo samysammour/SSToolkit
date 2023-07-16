@@ -4,7 +4,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
-    using SSToolkit.Application.Commands.Core.Queries;
 
     /// <summary>
     /// Base Behavior that implements the IPipeline Behavior from MediatR
@@ -31,11 +30,11 @@
         /// Handle method
         /// </summary>
         /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
         /// <param name="next"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public virtual async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
+        public virtual async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             if (!this.CanProcess(request))
             {
@@ -44,6 +43,16 @@
 
             return await this.Process(request, next, cancellationToken).ConfigureAwait(false);
         }
+
+
+        /// <summary>
+        /// Process method (Should be implemented)
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="next"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public abstract Task<TResponse> Process(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken);
 
         /// <summary>
         /// Write conditions when the pipeline behaviour should be activated (Should be implemented)
@@ -62,13 +71,5 @@
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         protected abstract bool CanProcess(TRequest request);
-        
-        /// <summary>
-        /// Process method (Should be implemented)
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public abstract Task<TResponse> Process(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken);
     }
 }

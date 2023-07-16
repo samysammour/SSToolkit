@@ -14,6 +14,13 @@
             this.Seeds();
         }
 
+        public DbSet<Stub> Entities { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("stub");
+        }
+
         private void Seeds()
         {
             var entities = new List<Stub>();
@@ -26,20 +33,20 @@
                     FirstName = $"FirstName {i}",
                     LastName = $"LastName {i}",
                     NestedStubs = new List<NestedStub>
-                    { 
+                    {
                         new NestedStub()
                         {
                             Id = Guid.NewGuid(),
                             Value = $"NestedStub {i}",
                             SecondLevelNestedStubs = new List<SecondLevelNestedStub>
-                            { 
+                            {
                                 new SecondLevelNestedStub()
                                 {
                                     Id = Guid.NewGuid(),
                                     Value = $"SecondLevelNestedStub {i}"
                                 }
                             }
-                        } 
+                        }
                     },
                     NestedStubs2 = new List<NestedStub>
                     {
@@ -64,13 +71,6 @@
 
             this.Entities.AddRange(entities);
             this.SaveChanges();
-        }
-
-        public DbSet<Stub> Entities { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.HasDefaultSchema("stub");
         }
     }
 }

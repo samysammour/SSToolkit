@@ -1,11 +1,11 @@
 namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
 {
-    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
     using System.Collections.Generic;
     using System.Linq;
-    using Xunit;
     using Shouldly;
     using SSToolkit.Domain.Repositories;
+    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
+    using Xunit;
 
     public class OrderByIfTests
     {
@@ -38,7 +38,7 @@ namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
                 {
                     Orders = new List<OrderByOption<Stub>>
                     {
-                        new OrderByOption<Stub>(x => (x.Age), OrderByDirection.Asc),
+                        new OrderByOption<Stub>(x => x.Age, OrderByDirection.Asc),
                         new OrderByOption<Stub>(x => x.FirstName, OrderByDirection.Desc),
                     }
                 };

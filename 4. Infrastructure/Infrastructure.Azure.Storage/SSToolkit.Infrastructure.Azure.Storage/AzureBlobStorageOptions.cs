@@ -5,12 +5,12 @@
 
     public class AzureBlobStorageOptions
     {
-        private const string regex = "^(?=.{3,63}$)(?:[a-z0-9]+-?[a-z0-9]+)$";
+        private const string Regex = "^(?=.{3,63}$)(?:[a-z0-9]+-?[a-z0-9]+)$";
 
         /// <summary>
         /// Gets or Sets connection string
         /// </summary>
-        public string ConnectionString { get; set; }
+        public string ConnectionString { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or Sets container name (default: main)
@@ -41,7 +41,7 @@
         }
 
         private static string GetContainerNameWhenValid(string containerName)
-            => containerName.IsValidRegex(regex)
+            => containerName.IsValidRegex(Regex)
                     ? containerName
                     : throw new ArgumentException("Container name is invalid. See: https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata", nameof(containerName));
     }

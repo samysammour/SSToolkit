@@ -15,20 +15,20 @@
         /// <returns></returns>
         public static IOrderedQueryable<T> OrderByIf<T>(
             this IQueryable<T> source,
-            IFindOptions<T> options)
+            IFindOptions<T>? options)
             where T : class, IEntity
         {
-            if (source == null)
+            if (source is null)
             {
-                return Enumerable.Empty<T>() as IOrderedQueryable<T>;
+                return (IOrderedQueryable<T>)Enumerable.Empty<T>();
             }
 
             if (options == null || !options.HasOrders())
             {
-                return source as IOrderedQueryable<T>;
+                return (IOrderedQueryable<T>)source;
             }
 
-            IOrderedQueryable<T> result = null;
+            IOrderedQueryable<T>? result = null;
             foreach (var order in options.GetOrders())
             {
                 result = result == null
@@ -40,7 +40,7 @@
                             : result.ThenByDescending(order.Expression);
             }
 
-            return result;
+            return result ?? (IOrderedQueryable<T>)source;
         }
     }
 }

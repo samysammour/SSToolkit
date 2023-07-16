@@ -10,7 +10,6 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <param name="count"></param>
-        /// <param name="condition"></param>
         /// <returns></returns>
         public static IQueryable<T> SkipIf<T>(
             this IQueryable<T> source,

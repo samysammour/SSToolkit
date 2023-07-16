@@ -1,10 +1,10 @@
 namespace SSToolkit.Infrastructure.EntityFrameworkCore.Tests
 {
-    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
     using System.Linq;
-    using Xunit;
     using Shouldly;
     using SSToolkit.Domain.Repositories;
+    using SSToolkit.Infrastructure.EntityFrameworkCore.Extensions;
+    using Xunit;
 
     public class TakeSkipIfTests
     {

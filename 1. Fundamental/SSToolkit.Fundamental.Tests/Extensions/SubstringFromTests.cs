@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public partial class SubstringFromTests
@@ -9,7 +9,7 @@
         [Fact]
         public void SubstringFrom_Test()
         {
-            ((string)null).SubstringFrom("hello").ShouldBeNull();
+            (null as string).SubstringFrom("hello").ShouldBeNull();
             string.Empty.SubstringFrom("hello").ShouldBeEmpty();
             string.Empty.SubstringFrom(null).ShouldBeEmpty();
             string.Empty.SubstringFrom(string.Empty).ShouldBeEmpty();

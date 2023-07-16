@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public partial class ToDoubleTests
@@ -9,10 +9,10 @@
         [Fact]
         public void ToDouble_Test()
         {
-            ((string)null).ToDouble().ShouldBe(0);
-            ((string)null).ToDouble(@default: 0).ShouldBe(0);
+            (null as string).ToDouble().ShouldBe(0);
+            (null as string).ToDouble(@default: 0).ShouldBe(0);
 
-            ((string)null).ToNullableDouble(@default: null).ShouldBeNull();
+            (null as string).ToNullableDouble(@default: null).ShouldBeNull();
 
             string.Empty.ToDouble().ShouldBe(0);
             string.Empty.ToDouble(@default: 0).ShouldBe(0);

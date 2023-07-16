@@ -41,7 +41,7 @@
         /// </returns>
         public static long? ToEpoch(this DateTime? source)
         {
-            if(!source.HasValue)
+            if (!source.HasValue)
             {
                 return null;
             }

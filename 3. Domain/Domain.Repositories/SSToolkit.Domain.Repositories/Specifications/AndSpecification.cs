@@ -18,6 +18,6 @@
         public override Expression<Func<T, bool>> ToExpression()
             => this.leftSpecification.ToExpression().And(this.rightSpecification.ToExpression());
 
-        public override string ToString() => this.ToExpression()?.ToString();
+        public override string ToString() => this.ToExpression().ToString();
     }
 }

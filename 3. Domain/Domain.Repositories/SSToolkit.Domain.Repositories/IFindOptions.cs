@@ -23,23 +23,23 @@
         /// <summary>
         /// Gets or sets the Orders.
         /// </summary>
-        OrderByOption<T> Order { get; set; }
+        OrderByOption<T>? Order { get; set; }
 
 
         /// <summary>
         /// Gets or sets the Orders.
         /// </summary>
-        IEnumerable<OrderByOption<T>> Orders { get; set; }
+        IEnumerable<OrderByOption<T>>? Orders { get; set; }
 
         /// <summary>
         /// Gets or sets the Include.
         /// </summary>
-        IncludeOption<T> Include { get; set; }
+        IncludeOption<T>? Include { get; set; }
 
         /// <summary>
         /// Gets or sets the Includes.
         /// </summary>
-        IEnumerable<IncludeOption<T>> Includes { get; set; }
+        IEnumerable<IncludeOption<T>>? Includes { get; set; }
 
         /// <summary>
         /// Gets or sets the TrackChanges.

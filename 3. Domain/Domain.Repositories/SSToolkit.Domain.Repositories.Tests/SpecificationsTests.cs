@@ -162,7 +162,7 @@ namespace SSToolkit.Domain.Repositories.Tests
             var specification = new Specification<StubEntity>(e => e.FirstName == "Jack");
 
             var stub = new StubEntity("Jack", "Black", 30);
-            
+
             specification.ToPredicate()(stub).ShouldBeTrue();
             specification.Not().ToPredicate()(stub).ShouldBeFalse();
             specification.Not().Not().ToPredicate()(stub).ShouldBeTrue();

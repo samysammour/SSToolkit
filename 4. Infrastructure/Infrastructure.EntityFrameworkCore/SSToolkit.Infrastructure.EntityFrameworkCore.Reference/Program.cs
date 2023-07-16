@@ -1,6 +1,8 @@
+#pragma warning disable SA1200 // Using directives should be placed correctly
 using SSToolkit.Domain.Repositories;
 using SSToolkit.Infrastructure.EntityFrameworkCore;
 using SSToolkit.Infrastructure.EntityFrameworkCore.Reference;
+#pragma warning restore SA1200 // Using directives should be placed correctly
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,7 @@ builder.Services.AddSwaggerGen();
 
 // Register Database
 builder.Services.AddDbContext<MyDbContext>(options =>
-    options.AddSqlServer(builder.Configuration.GetValue(typeof(string), "ConnectionString").ToString()));
+    options.AddSqlServer(builder.Configuration.GetValue(typeof(string), "ConnectionString")?.ToString() ?? string.Empty));
 
 // Register resiliency transaction
 builder.Services.RegisterResiliencyTransaction<MyDbContext>();
@@ -46,7 +48,10 @@ app.MapGet("/teachers/get", async (IRepository<Teacher> repository) =>
     teacher = await repository.InsertAsync(teacher);
 
     var dbTeacher = await repository.FindOneAsync(teacher.Id);
-    await repository.DeleteAsync(dbTeacher);
+    if (dbTeacher is not null)
+    {
+        await repository.DeleteAsync(dbTeacher);
+    }
 
     return dbTeacher;
 });

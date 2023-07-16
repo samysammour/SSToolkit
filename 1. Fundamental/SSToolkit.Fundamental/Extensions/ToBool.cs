@@ -43,7 +43,7 @@
                 return @default;
             }
 
-            if(source.Equals("1", StringComparison.Ordinal))
+            if (source.Equals("1", StringComparison.Ordinal))
             {
                 return true;
             }

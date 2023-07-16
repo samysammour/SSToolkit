@@ -2,12 +2,12 @@ namespace SSToolkit.Infrastructure.Azure.Storage.Tests
 {
     using System.IO;
     using System.Threading.Tasks;
+    using global::Azure.Storage.Blobs.Models;
     using Microsoft.Extensions.Logging;
     using NSubstitute;
     using SSToolkit.Fundamental.Extensions;
     using SSToolkit.Infrastructure.Azure.Storage.Decorators;
     using Xunit;
-    using global::Azure.Storage.Blobs.Models;
 
     public class AzureBlobStorageLogggingDecoratorTests
     {

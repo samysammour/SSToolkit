@@ -10,7 +10,6 @@
     public interface ICosmosDbRepository<TEntity> : IRepository<TEntity>
         where TEntity : CosmosDbEntity, IEntity<string>, IStateEntity
     {
-
         /// <summary>
         /// Retrives entities from the repository
         /// </summary>
@@ -25,7 +24,7 @@
         /// </summary>
         /// <param name="id">entity id</param>
         /// <returns>The entity that has the id</returns>
-        Task<TEntity> FindOneAsync(Guid id, CancellationToken cancellationToken);
+        Task<TEntity?> FindOneAsync(Guid id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Check if entity exists

@@ -11,40 +11,40 @@
     public class State
     {
         [JsonProperty(nameof(CreatedBy))]
-        public string CreatedBy { get; private set; }
+        public string? CreatedBy { get; private set; }
 
         [JsonProperty(nameof(CreatedDate))]
         public DateTimeOffset CreatedDate { get; private set; } = DateTimeOffset.UtcNow;
 
         [JsonProperty(nameof(CreatedDescription))]
-        public string CreatedDescription { get; private set; }
+        public string? CreatedDescription { get; private set; }
 
         [JsonProperty(nameof(UpdatedBy))]
-        public string UpdatedBy { get; private set; }
+        public string? UpdatedBy { get; private set; }
 
         [JsonProperty(nameof(UpdatedDate))]
         public DateTimeOffset UpdatedDate { get; private set; } = DateTimeOffset.UtcNow;
 
         [JsonProperty(nameof(UpdatedDescription))]
-        public string UpdatedDescription { get; set; }
+        public string? UpdatedDescription { get; set; }
 
         [JsonProperty(nameof(UpdatedReasons))]
-        public IEnumerable<string> UpdatedReasons { get; private set; }
+        public IEnumerable<string>? UpdatedReasons { get; private set; }
 
         [JsonProperty(nameof(Deleted))]
         public bool? Deleted { get; private set; }
 
         [JsonProperty(nameof(DeletedBy))]
-        public string DeletedBy { get; private set; }
+        public string? DeletedBy { get; private set; }
 
         [JsonProperty(nameof(DeletedDate))]
         public DateTimeOffset? DeletedDate { get; private set; }
 
         [JsonProperty(nameof(DeletedReason))]
-        public string DeletedReason { get; private set; }
+        public string? DeletedReason { get; private set; }
 
         [JsonProperty(nameof(DeletedDescription))]
-        public string DeletedDescription { get; set; }
+        public string? DeletedDescription { get; set; }
 
         /// <summary>
         /// Get last action date
@@ -67,7 +67,7 @@
         /// </summary>
         /// <param name="by">Name of the account of the creater.</param>
         /// <param name="description">The description for the creation.</param>
-        public virtual void SetCreated(string by = null, string description = null)
+        public virtual void SetCreated(string? by = null, string? description = null)
         {
             this.CreatedDate = DateTimeOffset.UtcNow;
             if (!by.IsNullOrEmpty())
@@ -86,7 +86,7 @@
         /// </summary>
         /// <param name="by">Name of the account of the updater.</param>
         /// <param name="reason">The reason of the update.</param>
-        public virtual void SetUpdated(string by = null, string reason = null)
+        public virtual void SetUpdated(string? by = null, string? reason = null)
         {
             this.UpdatedDate = DateTimeOffset.UtcNow;
 
@@ -102,7 +102,7 @@
                     this.UpdatedReasons = new List<string>();
                 }
 
-                this.UpdatedReasons = this.UpdatedReasons.Concat(new[]
+                this.UpdatedReasons = this.UpdatedReasons?.Concat(new[]
                 {
                     $"{by}: ({this.UpdatedDate.ToString(CultureInfo.InvariantCulture)}) {reason}".Trim()
                 });
@@ -114,7 +114,7 @@
         /// </summary>
         /// <param name="by">Name of the deleter.</param>
         /// <param name="reason">The reason.</param>
-        public virtual void SetDeleted(string by = null, string reason = null)
+        public virtual void SetDeleted(string? by = null, string? reason = null)
         {
             this.Deleted = true;
             this.DeletedDate = DateTimeOffset.UtcNow;

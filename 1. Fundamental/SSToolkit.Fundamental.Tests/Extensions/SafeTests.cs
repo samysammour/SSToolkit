@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public class SafeTests
@@ -16,7 +16,7 @@
                 .ShouldNotBeNull()
                 .ShouldBe(Enumerable.Empty<string>());
 
-            (new List<string?> { null }.AsEnumerable())
+            new List<string?> { null }.AsEnumerable()
                 .Safe()
                 .ShouldNotBeNull()
                 .ShouldBe(Enumerable.Empty<string>());

@@ -57,7 +57,7 @@
         /// <returns><see langword="true"/> if the object is type of <typeparamref name="T"/>.</returns>
         public static bool Is<T>(this object source)
         {
-            if(source == null)
+            if (source == null)
             {
                 return false;
             }

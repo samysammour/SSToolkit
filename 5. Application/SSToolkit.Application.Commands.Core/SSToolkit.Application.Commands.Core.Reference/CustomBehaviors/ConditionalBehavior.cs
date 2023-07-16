@@ -1,10 +1,10 @@
 ﻿namespace SSToolkit.Application.Commands.Core.Reference.CustomBehaviors
 {
+    using System.Threading;
+    using System.Threading.Tasks;
     using MediatR;
     using SSToolkit.Application.Commands.Core.Behaviors;
     using SSToolkit.Application.Commands.Core.Queries;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     public class ConditionalBehavior<TRequest, TResponse> : BaseBehavior<TRequest, TResponse>
         where TRequest : class, IRequest<TResponse>

@@ -31,12 +31,12 @@
         [DebuggerStepThrough]
         public static string Slice(this string source, int start, int end)
         {
-            if(source.IsNullOrEmpty())
+            if (source.IsNullOrEmpty())
             {
                 return source;
             }
 
-            if(end > source.Length)
+            if (end > source.Length)
             {
                 return source.Substring(start, source.Length);
             }

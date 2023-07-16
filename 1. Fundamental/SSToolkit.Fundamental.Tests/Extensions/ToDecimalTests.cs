@@ -1,7 +1,7 @@
 ﻿namespace SSToolkit.Fundamental.Tests.Extensions
 {
-    using Fundamental.Extensions;
     using Shouldly;
+    using SSToolkit.Fundamental.Extensions;
     using Xunit;
 
     public partial class ToDecimalTests
@@ -9,10 +9,10 @@
         [Fact]
         public void ToDecimal_Test()
         {
-            ((string)null).ToDecimal().ShouldBe(0);
-            ((string)null).ToDecimal(@default: 0).ShouldBe(0);
+            (null as string).ToDecimal().ShouldBe(0);
+            (null as string).ToDecimal(@default: 0).ShouldBe(0);
 
-            ((string)null).ToNullableDecimal(@default: null).ShouldBeNull();
+            (null as string).ToNullableDecimal(@default: null).ShouldBeNull();
 
             string.Empty.ToDecimal().ShouldBe(0);
             string.Empty.ToDecimal(@default: 0).ShouldBe(0);

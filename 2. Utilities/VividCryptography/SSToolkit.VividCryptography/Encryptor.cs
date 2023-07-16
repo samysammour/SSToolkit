@@ -13,7 +13,7 @@
         private readonly string key;
 
         /// <summary>
-        /// Initial Encryptor
+        /// Initializes a new instance of the <see cref="Encryptor"/> class.
         /// </summary>
         /// <param name="key">Encryption/Decryption key (Suggested: 64 or 128 bytes)</param>
         public Encryptor(string key)

@@ -13,18 +13,22 @@
             var transaction = new ScopedTransaction();
 
             // Async
-            await transaction.ExecuteAsync(async () =>
+            await transaction.ExecuteAsync(() =>
             {
                 Assert.True(true);
+                return Task.CompletedTask;
             }).AnyContext();
 
             // Sync
-            transaction.ExecuteAsync(async () =>
+            var transaction2 = new ScopedTransaction();
+            transaction2.ExecuteAsync(() =>
             {
                 Assert.True(true);
+                return Task.CompletedTask;
             }).Wait();
 
             // With result
+            var transaction3 = new ScopedTransaction();
             var result = await transaction.ExecuteResultAsync(async () =>
             {
                 return await Task.FromResult("Result").AnyContext();

@@ -17,7 +17,7 @@
         /// <param name="indexingMode"></param>
         /// <returns></returns>
         public static IndexingPolicy Create(bool automatic = true, IndexingMode indexingMode = IndexingMode.Consistent)
-            => new IndexingPolicy()
+            => new()
             {
                 Automatic = automatic,
                 IndexingMode = indexingMode
@@ -35,7 +35,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (expression == null)
@@ -58,7 +58,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (path.IsNullOrEmpty())
@@ -89,7 +89,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (expression == null)
@@ -112,7 +112,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (path.IsNullOrEmpty())
@@ -143,7 +143,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (expression == null)
@@ -166,7 +166,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (paths.IsNullOrEmpty())
@@ -195,7 +195,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (paths.IsNullOrEmpty())
@@ -218,7 +218,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (paths.IsNullOrEmpty())
@@ -276,7 +276,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (path.IsNullOrEmpty())
@@ -319,7 +319,7 @@
         {
             if (source == null)
             {
-                return default;
+                return new IndexingPolicy();
             }
 
             if (spatialPath == null)
@@ -333,5 +333,3 @@
         }
     }
 }
-
-

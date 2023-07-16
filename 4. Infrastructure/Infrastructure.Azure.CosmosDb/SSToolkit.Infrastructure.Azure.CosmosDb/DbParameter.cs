@@ -2,10 +2,6 @@
 {
     public class DbParameter
     {
-        public DbParameter()
-        {
-        }
-
         public DbParameter(string field, object value)
         {
             this.Value = value;

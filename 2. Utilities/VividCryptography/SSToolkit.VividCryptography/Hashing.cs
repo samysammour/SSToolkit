@@ -16,12 +16,9 @@
         /// <returns>Salt bytes</returns>
         public static byte[] GetSalt(int saltSize = 64)
         {
-            using (var cryptoProvider = new RNGCryptoServiceProvider())
-            {
                 byte[] salt = new byte[saltSize];
-                cryptoProvider.GetBytes(salt);
-                return salt;
-            }
+                var cryptoProvider = RandomNumberGenerator.GetBytes(salt.Length);
+                return cryptoProvider;
         }
 
         /// <summary>
@@ -32,11 +29,11 @@
         /// <param name="iteration">The hashing repeating count (default: 1) (Suggested: 100000)</param>
         /// <param name="hashType">The hashing type (default: 1)</param>
         /// <returns>Computed hash string</returns>
-        public static string ComputeHash(string value, byte[] salt = null, int iteration = 1, HashType hashType = HashType.Sha256)
+        public static string ComputeHash(string value, byte[]? salt = null, int iteration = 1, HashType hashType = HashType.Sha256)
         {
             if (string.IsNullOrEmpty(value))
             {
-                return null;
+                return string.Empty;
             }
 
             var hash = value + (salt != null ? Convert.ToBase64String(salt) : string.Empty);
@@ -62,11 +59,11 @@
         /// <param name="iteration">The hashing repeating count (default: 1) (Suggested: 100000)</param>
         /// <param name="hashType">The hashing type (default: 1)</param>
         /// <returns>Computed hash bytes</returns>
-        public static byte[] ComputeHash(byte[] value, byte[] salt = null, int iteration = 1, HashType hashType = HashType.Sha256)
+        public static byte[] ComputeHash(byte[] value, byte[]? salt = null, int iteration = 1, HashType hashType = HashType.Sha256)
         {
             if (value == null)
             {
-                return null;
+                return Array.Empty<byte>();
             }
 
             return Convert.FromBase64String(ComputeHash(Convert.ToBase64String(value), salt, iteration, hashType));
@@ -76,7 +73,7 @@
         {
             if (value == null)
             {
-                return null;
+                return new MemoryStream();
             }
 
             var stream = new MemoryStream();

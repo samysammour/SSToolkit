@@ -11,7 +11,7 @@
         /// <param name="source"></param>
         /// <param name="configuration">EntityFrameworkConfiguration</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">ArgumentNullException</exception>
         public static DbContextOptionsBuilder AddSqlServer(
             this DbContextOptionsBuilder source,
             EntityFrameworkConfiguration configuration)
@@ -33,7 +33,7 @@
                 source.EnableSensitiveDataLogging();
             }
 
-            if (configuration.EnableSensitiveDataLogging)
+            if (configuration.EnableDetailedErrors)
             {
                 source.EnableDetailedErrors();
             }
@@ -51,10 +51,7 @@
             this DbContextOptionsBuilder source,
             string connectionString)
         {
-            return source.AddSqlServer(new EntityFrameworkConfiguration()
-            {
-                ConnectionString = connectionString
-            });
+            return source.AddSqlServer(new EntityFrameworkConfiguration(connectionString));
         }
     }
 }

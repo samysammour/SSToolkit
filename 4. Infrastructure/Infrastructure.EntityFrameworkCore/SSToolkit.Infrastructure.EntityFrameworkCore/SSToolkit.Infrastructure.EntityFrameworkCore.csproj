@@ -1,53 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-  </PropertyGroup>
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<SignAssembly>False</SignAssembly>
-		<LangVersion>10</LangVersion>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Authors>Samy Sammour</Authors>
-		<Copyright>Samy Sammour</Copyright>
-		<Description>SSToolkit.Infrastructure.EntityFrameworkCore for generic entity framework with Specification pattern. Suitable for DDD or other DIY principles</Description>
-		<PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Infrastructure.EntityFrameworkCore</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Infrastructure.EntityFrameworkCore</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>EntityFrameworkCore;EFCore;Repository;Repositories;GenericRepository;FindOptions;DDD;DIY;DbContext</PackageTags>
-		<PackageReleaseNotes>Publishing</PackageReleaseNotes>
-		<VersionPrefix>1.0.0</VersionPrefix>
-		<AssemblyName>SSToolkit.Infrastructure.EntityFrameworkCore</AssemblyName>
-		<RootNamespace>SSToolkit.Infrastructure.EntityFrameworkCore</RootNamespace>
-	</PropertyGroup>
+    <PropertyGroup>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Description>SSToolkit.Infrastructure.EntityFrameworkCore for generic entity framework with Specification pattern. Suitable for DDD or other DIY principles</Description>
+        <PackageProjectUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Infrastructure.EntityFrameworkCore</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/samysammour/SSToolkit/tree/master/Infrastructure.EntityFrameworkCore/SSToolkit.Infrastructure.EntityFrameworkCore</RepositoryUrl>
+        <PackageTags>EntityFrameworkCore;EFCore;Repository;Repositories;GenericRepository;FindOptions;DDD;DIY;DbContext</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <AssemblyName>SSToolkit.Infrastructure.EntityFrameworkCore</AssemblyName>
+        <RootNamespace>SSToolkit.Infrastructure.EntityFrameworkCore</RootNamespace>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\1. Fundamental\SSToolkit.Fundamental\SSToolkit.Fundamental.csproj" />
-    <ProjectReference Include="..\..\..\3. Domain\Domain.Repositories\SSToolkit.Domain.Repositories\SSToolkit.Domain.Repositories.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Include="..\..\..\CentralGlobalSuppressions.cs" Link="CentralGlobalSuppressions.cs" />                    
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Update="README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-	
-  <ItemGroup>
-    <None Update="README.md">
-      <PackagePath>\</PackagePath>
-      <Pack>True</Pack>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\1. Fundamental\SSToolkit.Fundamental\SSToolkit.Fundamental.csproj" />
+        <ProjectReference Include="..\..\..\3. Domain\Domain.Repositories\SSToolkit.Domain.Repositories\SSToolkit.Domain.Repositories.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="README.md">
+            <PackagePath>\</PackagePath>
+            <Pack>True</Pack>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+    </ItemGroup>
 
 </Project>

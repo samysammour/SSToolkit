@@ -4,7 +4,7 @@
     using Microsoft.Extensions.Logging;
     using SSToolkit.Infrastructure.Azure.Storage.Decorators;
 
-    public static class AzureBlobStorageExtensions
+    public static partial class AzureBlobStorageExtensions
     {
         /// <summary>
         /// Register azure blob storage
@@ -13,7 +13,7 @@
         /// <param name="connectionString">The storage connection string</param>
         /// <param name="containerName">The main container (default: main) (Container could be specified later per request) See for valid container name: <see href="https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata"/></param>
         /// <param name="shouldIncludeLogging">Should include logging decorator (default: true)</param>
-        /// <returns>Service collection</returns>
+        /// <returns>Return the service collection</returns>
         public static IServiceCollection RegisterAzureBlobStorage(this IServiceCollection services, string connectionString, string containerName = "main", bool shouldIncludeLogging = true)
         {
             services.AddScoped<IAzureBlobStorage>(serviceProvider =>
@@ -42,7 +42,7 @@
         /// <param name="services">Service collection</param>
         /// <param name="options">Blob storage options</param>
         /// <param name="shouldIncludeLogging">Should include logging decorator (default: true)</param>
-        /// <returns>Service collection</returns>
+        /// <returns>Return the service collection</returns>
         public static IServiceCollection RegisterAzureBlobStorage(this IServiceCollection services, AzureBlobStorageOptions options, bool shouldIncludeLogging = true)
         {
             if (options == null)
